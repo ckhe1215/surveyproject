@@ -1,4 +1,9 @@
+haeun/kim/surveyproject/domain/Posts.java
+ haeun.kim.surveyproject.domain.Posts
+ haeun.kim.surveyproject.domain.Posts$PostsBuilder
 haeun/kim/surveyproject/controller/IndexController.java
  haeun.kim.surveyproject.controller.IndexController
 haeun/kim/surveyproject/Application.java
  haeun.kim.surveyproject.Application
+haeun/kim/surveyproject/repository/PostsRepository.java
+ haeun.kim.surveyproject.repository.PostsRepository
