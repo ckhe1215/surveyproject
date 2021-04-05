@@ -60,4 +60,30 @@ public class PostRepositoryTest {
         assertThat(posts.getExpiredDate()).isEqualTo(expiredDate);
         assertThat(posts.isExpired()).isEqualTo(isExpired);
     }
+
+    @Test
+    public void BaseTimeEntity_등록() {
+        // given
+        LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
+        postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .surveyId(12345L)
+                .answerGoal(200)
+                .expiredDate(LocalDateTime.of(2020, 4, 4, 17, 54))
+                .isExpired(false)
+                .build());
+
+        // when
+        List<Posts> postsList = postsRepository.findAll();
+
+        // then
+        Posts posts = postsList.get(0);
+
+        System.out.println(">>>>>>>> createdDate="+posts.getCreatedDate()+", modifiedDate="+posts.getModifiedDate());
+
+        assertThat(posts.getCreatedDate()).isAfter(now);
+        assertThat(posts.getModifiedDate()).isAfter(now);
+    }
 }
