@@ -47,4 +47,13 @@ public class Posts {
         this.expiredDate = expiredDate;
         this.isExpired = isExpired;
     }
+
+    public void update(String title, String content, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
+        this.title = title;
+        this.content = content;
+        this.surveyId = surveyId;
+        this.answerGoal = answerGoal;
+        this.expiredDate = expiredDate;
+        this.isExpired = isExpired;
+    }
 }
