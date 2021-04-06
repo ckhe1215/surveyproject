@@ -1,0 +1,53 @@
+{{>layout/header}}
+
+<article>
+    <h1>게시글 수정</h1>
+    <br>
+    <form>
+        <div class="form-group">
+            <label for="id">글번호</label>
+            <input type="text" class="form-control" id="id" value="{{post.id}}" readonly>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" value="{{post.title}}">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="author">작성자</label>
+            <input type="text" class="form-control" id="author" value="{{post.title}}" readonly>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea class="form-control" id="content">{{post.content}}</textarea>
+        </div>
+        <br>
+
+        <!--    surveyId(surveyId)-->
+        <!--    자신이 이전에 만든 설문들 중에서 선택할 수 있다.-->
+
+        <div class="form-group">
+            <label for="answerGoal">목표 설문수</label>
+            <input type="number" class="form-control" id="answerGoal" min="1" max="5" value="{{post.answerGoal}}">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="expiredDate">마감일자</label>
+            <input type="datetime-local" class="form-control" id="expiredDate" value="{{post.expiredDate}}">
+        </div>
+        <br>
+
+        <!--    isExpired(isExpired) -> false-->
+    </form>
+
+    <a href="/posts/detail/{{id}}" role="button" class="btn btn-secondary">취소</a>
+    <button type="button" class="btn btn-primary" id="btn-update">수정 완료</button>
+</article>
+
+{{>layout/footer}}

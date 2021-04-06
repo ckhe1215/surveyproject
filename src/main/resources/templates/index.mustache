@@ -3,8 +3,28 @@
 <article>
     <section class="title">
         <h1>최신글보기</h1>
-        <button type="button" class="btn btn-danger">글 작성</button>
+        <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
     </section>
+
+    <!--목록 출력 영역-->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th style="width:60px">번호</th>
+            <th>제목</th>
+            <th style="width:150px">작성자</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/posts/detail/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
 </article>
 
 {{>layout/footer}}

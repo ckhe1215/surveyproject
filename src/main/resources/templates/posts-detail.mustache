@@ -1,0 +1,44 @@
+{{>layout/header}}
+
+<article>
+    <table class="table table-bordered">
+        <tr>
+            <td style="width: 120px">글 번호</td>
+            <td id="id">{{post.id}}</td>
+        </tr>
+        <tr>
+            <td>작성자</td>
+            <td>{{post.author}}</td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td>{{post.title}}</td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td>{{post.content}}</td>
+        </tr>
+        <tr>
+            <td>목표 설문 수</td>
+            <td>{{post.answerGoal}}</td>
+        </tr>
+        <tr>
+            <td>설문 링크</td>
+            <td>{{post.surveyId}}</td>
+        </tr>
+        <tr>
+            <td>마감일자</td>
+            <td>{{post.expiredDate}}</td>
+        </tr>
+        <tr>
+            <td>마감여부</td>
+            <td>{{post.isExpired}}</td>
+        </tr>
+    </table>
+
+    <a href="/" role="button" class="btn btn-secondary">뒤로</a>
+    <a href="/posts/update/{{id}}" role="button" class="btn btn-primary">수정</a>
+    <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+</article>
+
+{{>layout/footer}}
