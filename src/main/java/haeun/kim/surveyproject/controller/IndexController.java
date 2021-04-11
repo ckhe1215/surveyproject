@@ -1,6 +1,5 @@
 package haeun.kim.surveyproject.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import haeun.kim.surveyproject.dto.PostsResponseDto;
 import haeun.kim.surveyproject.service.PostsService;
 import lombok.RequiredArgsConstructor;
