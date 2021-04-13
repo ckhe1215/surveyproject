@@ -1,0 +1,17 @@
+{{>layout/header}}
+<article>
+    <h1>설문 생성</h1>
+    <br>
+    <form>
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="survey_title" placeholder="제목을 입력하세요">
+        </div>
+        <br>
+
+        <!--작성자 이메일-->
+        <input type="hidden" id="user_email" value="{{userEmail}}">
+    </form>
+    <button type="button" class="btn btn-danger" id="btn-create-survey">질문 추가</button>
+</article>
+{{>layout/footer}}

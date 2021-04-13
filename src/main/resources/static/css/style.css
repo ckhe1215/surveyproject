@@ -29,6 +29,14 @@ article {
     align-items: center;
 }
 
+#choice_option {
+    display : none;
+}
+
+#post-control {
+    display : none;
+}
+
 @media screen and (max-width: 768px) {
     .navbar {
         padding: 8px 12px;

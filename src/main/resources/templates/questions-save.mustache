@@ -1,0 +1,101 @@
+{{>layout/header}}
+<article>
+    <h1>질문 추가</h1>
+    <br>
+    <form>
+        <div class="form-group">
+            <label for="question-content">질문</label>
+            <input type="text" class="form-control" id="question-content" placeholder="질문을 입력하세요">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label><input type="checkbox" id="necessary">필수 답변 항목</label>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label><input type="radio" id="choice_true" name="choice">객관식</label>
+            <label><input type="radio" id="choice_false" name="choice">주관식</label>
+        </div>
+        <br>
+
+        <div id = "choice_option">
+            <div class="form-group">
+                <label><input type="checkbox" id="multiple">중복 답 허용</label>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice1">1번 보기</label>
+                <input type="text" class="form-control" id="choice1" placeholder="1번 보기를 입력하세요">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice2">2번 보기</label>
+                <input type="text" class="form-control" id="choice2" placeholder="2번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice3">3번 보기</label>
+                <input type="text" class="form-control" id="choice3" placeholder="3번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice1">4번 보기</label>
+                <input type="text" class="form-control" id="choice4" placeholder="4번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice1">5번 보기</label>
+                <input type="text" class="form-control" id="choice5" placeholder="5번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice6">6번 보기</label>
+                <input type="text" class="form-control" id="choice6" placeholder="6번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice7">7번 보기</label>
+                <input type="text" class="form-control" id="choice7" placeholder="7번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice8">8번 보기</label>
+                <input type="text" class="form-control" id="choice8" placeholder="8번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice9">9번 보기</label>
+                <input type="text" class="form-control" id="choice9" placeholder="9번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="choice10">10번 보기</label>
+                <input type="text" class="form-control" id="choice10" placeholder="10번 보기를 입력하세요(선택)">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label><input type="checkbox" id="etc_answer">기타 주관식 답변 허용</label>
+            </div>
+            <br>
+        </div>
+
+    </form>
+
+    <button type="button" class="btn btn-danger" id="btn-add-question">질문 추가</button>
+    <button type="button" class="btn btn-primary" id="btn-no-more-question">설문 완성</button>
+
+</article>
+{{>layout/footer}}

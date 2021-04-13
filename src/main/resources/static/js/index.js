@@ -12,12 +12,31 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         })
+
+        $('#btn-create-survey').on('click', function () {
+            _this.createSurvey();
+        })
+
+        $('#choice_true').on('click', function () {
+            $('#choice_option').css("display", "block");
+        })
+
+        $('#choice_false').on('click', function () {
+            $('#choice_option').css("display", "none");
+        })
+
+        var detail_author_email = $('#detail_author_email').val();
+        var detail_user_email = $('#detail_user_email').val();
+        if (detail_author_email == detail_user_email) {
+            $('#post-control').css("display", "block");
+        }
     },
     save : function () {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
             author: $('#author').val(),
+            author_email: $('#author_email').val(),
             surveyId: 12345,
             answerGoal: $('#answerGoal').val(),
             expiredDate: $('#expiredDate').val(),
@@ -78,6 +97,25 @@ var main = {
          }).fail(function (error) {
              alert(JSON.stringify(error));
          });
+    },
+
+    createSurvey : function () {
+        var data = {
+                title: $('#survey_title').val(),
+                author: $('#user_email').val(),
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/surveys',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                window.location.href = '/questions/save';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
     }
 };
 

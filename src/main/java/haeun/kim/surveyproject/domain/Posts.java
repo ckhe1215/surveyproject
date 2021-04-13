@@ -26,6 +26,9 @@ public class Posts extends BaseTimeEntity{
     private String author;
 
     @Column(nullable = false)
+    private String author_email;
+
+    @Column(nullable = false)
     private Long surveyId;
 
     @Column(nullable = false)
@@ -38,10 +41,11 @@ public class Posts extends BaseTimeEntity{
     private boolean isExpired;
 
     @Builder
-    public Posts(String title, String content, String author, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
+    public Posts(String title, String content, String author, String author_email, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
         this.title = title;
         this.content = content;
         this.author = author;
+        this.author_email = author_email;
         this.surveyId = surveyId;
         this.answerGoal = answerGoal;
         this.expiredDate = expiredDate;

@@ -12,18 +12,28 @@
 
         <div class="form-group">
             <label for="author">작성자</label>
-            <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+            <input type="text" class="form-control" id="author" value="{{userName}}" readonly>
         </div>
         <br>
+
+        <input type="hidden" id="author_email" value="{{userEmail}}">
+
+        <div class="form-group">
+            <label for="surveyId">설문선택</label>
+            <br>
+            <a href="/surveys/save" role="button" class="btn btn-danger">설문 생성</a>
+            <!--설문 목록 보여주고 선택할 수 있게함-->
+            <!-- surveyId(surveyId)-->
+            <!-- survey.author == userEmail인 설문 목록을 띄워야함-->
+        </div>
+        <br>
+
 
         <div class="form-group">
             <label for="content">내용</label>
             <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
         </div>
         <br>
-
-        <!--    surveyId(surveyId)-->
-        <!--    자신이 이전에 만든 설문들 중에서 선택할 수 있다.-->
 
         <div class="form-group">
             <label for="answerGoal">목표 설문수</label>

@@ -29,15 +29,21 @@ public class IndexController {
     }
 
     @GetMapping("/posts/save")
-    public String postsSave() {
+    public String postsSave(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userEmail", user.getEmail());
+        }
         return "posts-save";
     }
 
     @GetMapping("/posts/detail/{id}")
-    public String postsDetail(@PathVariable Long id, Model model) {
+    public String postsDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
-
+        if (user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+        }
         return "posts-detail";
     }
 
