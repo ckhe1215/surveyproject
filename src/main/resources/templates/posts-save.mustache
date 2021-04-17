@@ -25,6 +25,22 @@
             <!--설문 목록 보여주고 선택할 수 있게함-->
             <!-- surveyId(surveyId)-->
             <!-- survey.author == userEmail인 설문 목록을 띄워야함-->
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
+                <tr>
+                    <th style="width:60px">번호</th>
+                    <th>제목</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                {{#mySurveys}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{title}}</td>
+                    </tr>
+                {{/mySurveys}}
+                </tbody>
+            </table>
         </div>
         <br>
 

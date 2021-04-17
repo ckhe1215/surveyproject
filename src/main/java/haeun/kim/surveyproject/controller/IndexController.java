@@ -4,6 +4,7 @@ import haeun.kim.surveyproject.config.auth.LoginUser;
 import haeun.kim.surveyproject.config.auth.dto.SessionUser;
 import haeun.kim.surveyproject.dto.PostsResponseDto;
 import haeun.kim.surveyproject.service.PostsService;
+import haeun.kim.surveyproject.service.SurveysService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
+    private final SurveysService surveysService;
     private final HttpSession httpSession;
 
     @GetMapping("/")
@@ -33,6 +35,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("mySurveys", surveysService.findByUser(user.getEmail()));
         }
         return "posts-save";
     }
