@@ -3,6 +3,9 @@
     <h1>질문 추가</h1>
     <br>
     <form>
+        <input type="hidden" id="survey_id" value="{{Survey.id}}">
+        <input type="hidden" id="survey_title" value="{{Survey.title}}">
+        <input type="hidden" id="survey_author" value="{{Survey.author}}">
         <div class="form-group">
             <label for="question-content">질문</label>
             <input type="text" class="form-control" id="question-content" placeholder="질문을 입력하세요">
@@ -15,8 +18,8 @@
         <br>
 
         <div class="form-group">
-            <label><input type="radio" id="choice_true" name="choice">객관식</label>
-            <label><input type="radio" id="choice_false" name="choice">주관식</label>
+            <label><input type="radio" id="choice_true" name="choicable">객관식</label>
+            <label><input type="radio" id="choice_false" name="choicable">주관식</label>
         </div>
         <br>
 

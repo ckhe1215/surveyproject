@@ -29,4 +29,10 @@ public class SurveysService {
                 .map(SurveysListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public SurveysResponseDto findTop1ByAuthorOrderByCreatedDateDesc(String email){
+        Surveys entity = surveysRepository.findTop1ByAuthorOrderByCreatedDateDesc(email);
+
+        return new SurveysResponseDto(entity);
+    }
 }
