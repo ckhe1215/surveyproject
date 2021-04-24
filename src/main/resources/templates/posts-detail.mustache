@@ -39,8 +39,12 @@
     <input type="hidden" id="detail_user_email" value="{{userEmail}}">
     <input type="hidden" id="detail_author_email" value="{{post.author_email}}">
 
+    <div id="add-reply">
+        <a href="/" role="button" class="btn btn-success">뒤로</a>
+    </div>
+
     <div id="post-control">
-        <a href="/" role="button" class="btn btn-secondary">뒤로</a>
+        <a href="/" role="button" class="btn btn-secondary">참여하기</a>
         <a href="/posts/update/{{id}}" role="button" class="btn btn-primary">수정</a>
         <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
     </div>

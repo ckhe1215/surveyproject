@@ -22,7 +22,7 @@
             <label for="surveyId">설문선택</label>
             <br>
             <a href="/surveys/save" role="button" class="btn btn-danger">설문 생성</a>
-            <table class="table table-horizontal table-bordered">
+            <table id = "survey-list" class="table table-hover table-horizontal table-bordered">
                 <thead class="thead-strong">
                 <tr>
                     <th style="width:60px">번호</th>
@@ -31,8 +31,8 @@
                 </thead>
                 <tbody id="tbody">
                 {{#mySurveys}}
-                    <tr>
-                        <td>{{id}}</td>
+                    <tr class = "clickable-row">
+                        <td id = "row_id">{{id}}</td>
                         <td>{{title}}</td>
                     </tr>
                 {{/mySurveys}}

@@ -1,3 +1,5 @@
+var selected_survey_id = 0;
+
 var main = {
     init : function () {
         var _this = this;
@@ -33,10 +35,21 @@ var main = {
             _this.createLastQuestion();
         })
 
+        $('#survey-list').on('click', '.clickable-row', function(event, row) {
+          if($(this).hasClass('table-active')){
+              $(this).removeClass('table-active');
+          } else {
+              $(this).addClass('table-active').siblings().removeClass('table-active');
+          }
+        });
+
         var detail_author_email = $('#detail_author_email').val();
         var detail_user_email = $('#detail_user_email').val();
         if (detail_author_email == detail_user_email) {
             $('#post-control').css("display", "block");
+        }
+        else {
+            $('#add-reply').css("display", "block");
         }
     },
     save : function () {
@@ -45,7 +58,7 @@ var main = {
             content: $('#content').val(),
             author: $('#author').val(),
             author_email: $('#author_email').val(),
-            surveyId: 12345,
+            surveyId: selected_survey_id,
             answerGoal: $('#answerGoal').val(),
             expiredDate: $('#expiredDate').val(),
             isExpired: false

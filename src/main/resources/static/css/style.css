@@ -37,6 +37,10 @@ article {
     display : none;
 }
 
+#add-reply {
+    display : none;
+}
+
 @media screen and (max-width: 768px) {
     .navbar {
         padding: 8px 12px;
