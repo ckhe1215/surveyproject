@@ -15,17 +15,15 @@ public class Answers extends BaseTimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Questions questions;
+    private Long questionId;
 
     private int choiceAnswer; // 객관식 답
 
     private String essayAnswer; // 주관식 답
 
     @Builder
-    public Answers(Questions questions, int choiceAnswer, String essayAnswer){
-        this.questions = questions;
+    public Answers(Long questionId, int choiceAnswer, String essayAnswer){
+        this.questionId = questionId;
         this.choiceAnswer = choiceAnswer;
         this.essayAnswer = essayAnswer;
     }

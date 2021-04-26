@@ -16,11 +16,4 @@ public class SurveysResponseDto {
         this.title = entity.getTitle();
         this.author = entity.getAuthor();
     }
-
-    public Surveys toEntity() {
-        return Surveys.builder()
-                .title(title)
-                .author(author)
-                .build();
-    }
 }

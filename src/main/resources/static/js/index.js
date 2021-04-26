@@ -71,7 +71,7 @@ var main = {
             title: $('#title').val(),
             content: $('#content').val(),
             author: $('#author').val(),
-            author_email: $('#author_email').val(),
+            authorEmail: $('#author_email').val(),
             surveyId: selected_survey_id,
             answerGoal: $('#answerGoal').val(),
             expiredDate: $('#expiredDate').val(),
@@ -165,41 +165,65 @@ var main = {
             var choice9 = $('#choice9').val();
             var choice10 = $('#choice10').val();
             var cnt = 0;
-            if (choice1) cnt++;
-            if (choice2) cnt++;
-            if (choice3) cnt++;
-            if (choice4) cnt++;
-            if (choice5) cnt++;
-            if (choice6) cnt++;
-            if (choice7) cnt++;
-            if (choice8) cnt++;
-            if (choice9) cnt++;
-            if (choice10) cnt++;
-
-            var temp_survey = {
-                id: $('#survey_id').val(),
-                title: $('#survey_title').val(),
-                author: $('#survey_author').val()
-            }
+            if (choice1)
+                cnt++;
+            else
+                choice1 = null;
+            if (choice2)
+                cnt++;
+            else
+                choice2 = null;
+            if (choice3)
+                cnt++;
+            else
+                choice3 = null;
+            if (choice4)
+                cnt++;
+            else
+                choice4 = null;
+            if (choice5)
+                cnt++;
+            else
+                choice5 = null;
+            if (choice6)
+                cnt++;
+            else
+                choice6 = null;
+            if (choice7)
+                cnt++;
+            else
+                choice7 = null;
+            if (choice8)
+                cnt++;
+            else
+                choice8 = null;
+            if (choice9)
+                cnt++;
+            else
+                choice9 = null;
+            if (choice10)
+                cnt++;
+            else
+                choice10 = null;
 
             var data = {
-                    surveys: temp_survey,
+                    surveyId: $('#survey_id').val(),
                     content: $('#question-content').val(),
                     choicable: $('#choice_true').is(':checked'),
                     multiple: $('#multiple').is(':checked'),
                     etcAnswer: $('#etc_answer').is(':checked'),
                     necessaryAns: $('#necessary').is(':checked'),
                     choiceCnt: cnt,
-                    choice1: $('#choice1').val(),
-                    choice2: $('#choice2').val(),
-                    choice3: $('#choice3').val(),
-                    choice4: $('#choice4').val(),
-                    choice5: $('#choice5').val(),
-                    choice6: $('#choice6').val(),
-                    choice7: $('#choice7').val(),
-                    choice8: $('#choice8').val(),
-                    choice9: $('#choice9').val(),
-                    choice10: $('#choice10').val()
+                    choice1: choice1,
+                    choice2: choice2,
+                    choice3: choice3,
+                    choice4: choice4,
+                    choice5: choice5,
+                    choice6: choice6,
+                    choice7: choice7,
+                    choice8: choice8,
+                    choice9: choice9,
+                    choice10: choice10
                 };
 
                 $.ajax({
@@ -227,41 +251,65 @@ var main = {
                 var choice9 = $('#choice9').val();
                 var choice10 = $('#choice10').val();
                 var cnt = 0;
-                if (choice1) cnt++;
-                if (choice2) cnt++;
-                if (choice3) cnt++;
-                if (choice4) cnt++;
-                if (choice5) cnt++;
-                if (choice6) cnt++;
-                if (choice7) cnt++;
-                if (choice8) cnt++;
-                if (choice9) cnt++;
-                if (choice10) cnt++;
-
-                var temp_survey = {
-                    id: $('#survey_id').val(),
-                    title: $('#survey_title').val(),
-                    author: $('#survey_author').val()
-                }
+                if (choice1)
+                    cnt++;
+                else
+                    choice1 = null;
+                if (choice2)
+                    cnt++;
+                else
+                    choice2 = null;
+                if (choice3)
+                    cnt++;
+                else
+                    choice3 = null;
+                if (choice4)
+                    cnt++;
+                else
+                    choice4 = null;
+                if (choice5)
+                    cnt++;
+                else
+                    choice5 = null;
+                if (choice6)
+                    cnt++;
+                else
+                    choice6 = null;
+                if (choice7)
+                    cnt++;
+                else
+                    choice7 = null;
+                if (choice8)
+                    cnt++;
+                else
+                    choice8 = null;
+                if (choice9)
+                    cnt++;
+                else
+                    choice9 = null;
+                if (choice10)
+                    cnt++;
+                else
+                    choice10 = null;
 
                 var data = {
-                        surveys: temp_survey,
+                        surveyId: $('#survey_id').val(),
                         content: $('#question-content').val(),
                         choicable: $('#choice_true').is(':checked'),
                         multiple: $('#multiple').is(':checked'),
                         etcAnswer: $('#etc_answer').is(':checked'),
                         necessaryAns: $('#necessary').is(':checked'),
                         choiceCnt: cnt,
-                        choice1: $('#choice1').val(),
-                        choice2: $('#choice2').val(),
-                        choice3: $('#choice3').val(),
-                        choice4: $('#choice4').val(),
-                        choice5: $('#choice5').val(),
-                        choice6: $('#choice6').val(),
-                        choice7: $('#choice7').val(),
-                        choice8: $('#choice8').val(),
-                        choice9: $('#choice9').val(),
-                        choice10: $('#choice10').val()
+                        choice1: choice1,
+                        choice2: choice2,
+                        choice3: choice3,
+                        choice4: choice4,
+                        choice5: choice5,
+                        choice6: choice6,
+                        choice7: choice7,
+                        choice8: choice8,
+                        choice9: choice9,
+                        choice10: choice10
                     };
 
                     $.ajax({

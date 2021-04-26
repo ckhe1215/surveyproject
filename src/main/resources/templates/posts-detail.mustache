@@ -23,10 +23,6 @@
             <td>{{post.answerGoal}}</td>
         </tr>
         <tr>
-            <td>설문 링크</td>
-            <td>{{post.surveyId}}</td>
-        </tr>
-        <tr>
             <td>마감일자</td>
             <td>{{post.expiredDate}}</td>
         </tr>
@@ -37,10 +33,10 @@
     </table>
 
     <input type="hidden" id="detail_user_email" value="{{userEmail}}">
-    <input type="hidden" id="detail_author_email" value="{{post.author_email}}">
+    <input type="hidden" id="detail_author_email" value="{{post.authorEmail}}">
 
     <div id="add-reply">
-        <a href="/" role="button" class="btn btn-success">참여하기</a>
+        <a href="/answers/save/{{post.surveyId}}" role="button" class="btn btn-success">참여하기</a>
     </div>
 
     <div id="post-control">

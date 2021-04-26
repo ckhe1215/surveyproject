@@ -13,7 +13,6 @@ public class Surveys extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "survey_id")
     private Long id;
 
     @Column(nullable = false)
@@ -21,8 +20,6 @@ public class Surveys extends BaseTimeEntity{
 
     @Column(nullable = false)
     private String author;
-
-    // 이거 포스트랑 매핑되야할듯
 
     @Builder
     public Surveys(String title, String author){

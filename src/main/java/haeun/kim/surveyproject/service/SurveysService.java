@@ -35,10 +35,4 @@ public class SurveysService {
 
         return new SurveysResponseDto(entity);
     }
-
-    public SurveysResponseDto findOneById(Long id) {
-        Surveys entity = surveysRepository.findOneById(id);
-
-        return new SurveysResponseDto(entity);
-    }
 }

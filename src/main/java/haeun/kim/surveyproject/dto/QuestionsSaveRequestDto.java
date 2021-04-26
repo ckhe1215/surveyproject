@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionsSaveRequestDto {
 
-    private Surveys surveys; // 어떤 설문에 대한 질문인가?
+    private Long surveyId; // 어떤 설문에 대한 질문인가?
     private String content;
     private Boolean choicable; // true면 객관식 false면 주관식
     private Boolean multiple; // true면 중복답 허용
@@ -29,12 +29,12 @@ public class QuestionsSaveRequestDto {
     private String choice10;
 
     @Builder
-    public QuestionsSaveRequestDto(Surveys surveys, String content, Boolean choicable, Boolean multiple, Boolean etcAnswer,
+    public QuestionsSaveRequestDto(Long surveyId, String content, Boolean choicable, Boolean multiple, Boolean etcAnswer,
                      Boolean necessaryAns, int choiceCnt, String choice1, String choice2, String choice3,
                      String choice4, String choice5, String choice6, String choice7, String choice8,
                      String choice9, String choice10)
     {
-        this.surveys = surveys;
+        this.surveyId = surveyId;
         this.content = content;
         this.choicable = choicable;
         this.multiple = multiple;
@@ -54,7 +54,7 @@ public class QuestionsSaveRequestDto {
     }
     public Questions toEntity(){
         return Questions.builder()
-                .surveys(surveys)
+                .surveyId(surveyId)
                 .content(content)
                 .choicable(choicable)
                 .multiple(multiple)

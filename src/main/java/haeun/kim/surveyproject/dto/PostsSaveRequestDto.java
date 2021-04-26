@@ -13,18 +13,18 @@ public class PostsSaveRequestDto {
     private String title;
     private String content;
     private String author;
-    private String author_email;
+    private String authorEmail;
     private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
     private boolean isExpired;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, String author_email, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
+    public PostsSaveRequestDto(String title, String content, String author, String authorEmail, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
         this.title = title;
         this.content = content;
         this.author = author;
-        this.author_email = author_email;
+        this.authorEmail = authorEmail;
         this.surveyId = surveyId;
         this.answerGoal = answerGoal;
         this.expiredDate = expiredDate;
@@ -35,7 +35,7 @@ public class PostsSaveRequestDto {
                 .title(title)
                 .content(content)
                 .author(author)
-                .author_email(author_email)
+                .authorEmail(authorEmail)
                 .surveyId(surveyId)
                 .answerGoal(answerGoal)
                 .expiredDate(expiredDate)

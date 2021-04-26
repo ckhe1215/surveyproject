@@ -24,14 +24,8 @@ public class  QuestionsService {
     }
 
     @Transactional
-    public List<QuestionsResponseDto> findBySurveys(Surveys surveys){
-        return questionsRepository.findBySurveys(surveys).stream()
-                .map(QuestionsResponseDto::new)
-                .collect(Collectors.toList());
-    }
-
-    public List<QuestionsResponseDto> findAll(){
-        return questionsRepository.findAll().stream()
+    public List<QuestionsResponseDto> findBySurveyId(Long id){
+        return questionsRepository.findBySurveyId(id).stream()
                 .map(QuestionsResponseDto::new)
                 .collect(Collectors.toList());
     }
