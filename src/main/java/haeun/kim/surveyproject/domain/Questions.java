@@ -13,6 +13,7 @@ public class Questions extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "question_id")
     private Long id;
 
     @ManyToOne

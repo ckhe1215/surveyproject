@@ -18,7 +18,31 @@
 
         <div class="form-group">
             <label for="author">작성자</label>
-            <input type="text" class="form-control" id="author" value="{{post.title}}" readonly>
+            <input type="text" class="form-control" id="author" value="{{post.author}}" readonly>
+        </div>
+        <br>
+
+        <input type="hidden" id="post-survey-id" value="{{post.surveyId}}">
+
+        <div class="form-group">
+            <label for="surveyId">설문선택</label>
+            <br>
+            <table id = "survey-list" class="table table-hover table-horizontal table-bordered">
+                <thead class="thead-strong">
+                <tr>
+                    <th style="width:60px">번호</th>
+                    <th>제목</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                {{#mySurveys}}
+                    <tr class = "clickable-row">
+                        <td id = "row_id">{{id}}</td>
+                        <td>{{title}}</td>
+                    </tr>
+                {{/mySurveys}}
+                </tbody>
+            </table>
         </div>
         <br>
 
@@ -27,9 +51,6 @@
             <textarea class="form-control" id="content">{{post.content}}</textarea>
         </div>
         <br>
-
-        <!--    surveyId(surveyId)-->
-        <!--    자신이 이전에 만든 설문들 중에서 선택할 수 있다.-->
 
         <div class="form-group">
             <label for="answerGoal">목표 설문수</label>

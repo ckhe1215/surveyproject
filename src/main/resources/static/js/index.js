@@ -1,4 +1,4 @@
-var selected_survey_id = 0;
+var selected_survey_id;
 
 var main = {
     init : function () {
@@ -43,6 +43,20 @@ var main = {
           }
         });
 
+        $('#survey-list tr').on('click', function(event, row) {
+            var tdArr = new Array();
+            var tr = $(this);
+            var td = tr.children();
+
+            td.each(function(i){
+                tdArr.push(td.eq(i).text());
+            });
+
+            var id = td.eq(0).text();
+            var title = td.eq(1).text();
+            selected_survey_id = id;
+        });
+
         var detail_author_email = $('#detail_author_email').val();
         var detail_user_email = $('#detail_user_email').val();
         if (detail_author_email == detail_user_email) {
@@ -82,7 +96,7 @@ var main = {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
-            surveyId: 12345,
+            surveyId: selected_survey_id,
             answerGoal: $('#answerGoal').val(),
             expiredDate: $('#expiredDate').val(),
             isExpired: false
