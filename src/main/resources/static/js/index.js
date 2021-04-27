@@ -1,4 +1,18 @@
 var selected_survey_id;
+var qCnt = $('#question-size').val();
+for(var i = 0; i < qCnt; i++) {
+    $("form-check-input, .ans1").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans2").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans3").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans4").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans5").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans6").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans7").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans8").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans9").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .ans10").eq(i).attr("name", "select-one-"+(i+1));
+    console.log("select-one-"+(i+1));
+}
 
 var main = {
     init : function () {
@@ -33,6 +47,10 @@ var main = {
 
         $('#btn-no-more-question').on('click', function () {
             _this.createLastQuestion();
+        })
+
+        $('#btn-answer-save').on('click', function () {
+            _this.createAnswer();
         })
 
         $('#survey-list').on('click', '.clickable-row', function(event, row) {
@@ -154,89 +172,89 @@ var main = {
     },
 
      createQuestion : function () {
-            var choice1 = $('#choice1').val();
-            var choice2 = $('#choice2').val();
-            var choice3 = $('#choice3').val();
-            var choice4 = $('#choice4').val();
-            var choice5 = $('#choice5').val();
-            var choice6 = $('#choice6').val();
-            var choice7 = $('#choice7').val();
-            var choice8 = $('#choice8').val();
-            var choice9 = $('#choice9').val();
-            var choice10 = $('#choice10').val();
-            var cnt = 0;
-            if (choice1)
-                cnt++;
-            else
-                choice1 = null;
-            if (choice2)
-                cnt++;
-            else
-                choice2 = null;
-            if (choice3)
-                cnt++;
-            else
-                choice3 = null;
-            if (choice4)
-                cnt++;
-            else
-                choice4 = null;
-            if (choice5)
-                cnt++;
-            else
-                choice5 = null;
-            if (choice6)
-                cnt++;
-            else
-                choice6 = null;
-            if (choice7)
-                cnt++;
-            else
-                choice7 = null;
-            if (choice8)
-                cnt++;
-            else
-                choice8 = null;
-            if (choice9)
-                cnt++;
-            else
-                choice9 = null;
-            if (choice10)
-                cnt++;
-            else
-                choice10 = null;
+        var choice1 = $('#choice1').val();
+        var choice2 = $('#choice2').val();
+        var choice3 = $('#choice3').val();
+        var choice4 = $('#choice4').val();
+        var choice5 = $('#choice5').val();
+        var choice6 = $('#choice6').val();
+        var choice7 = $('#choice7').val();
+        var choice8 = $('#choice8').val();
+        var choice9 = $('#choice9').val();
+        var choice10 = $('#choice10').val();
+        var cnt = 0;
+        if (choice1)
+            cnt++;
+        else
+            choice1 = null;
+        if (choice2)
+            cnt++;
+        else
+            choice2 = null;
+        if (choice3)
+            cnt++;
+        else
+            choice3 = null;
+        if (choice4)
+            cnt++;
+        else
+            choice4 = null;
+        if (choice5)
+            cnt++;
+        else
+            choice5 = null;
+        if (choice6)
+            cnt++;
+        else
+            choice6 = null;
+        if (choice7)
+            cnt++;
+        else
+            choice7 = null;
+        if (choice8)
+            cnt++;
+        else
+            choice8 = null;
+        if (choice9)
+            cnt++;
+        else
+            choice9 = null;
+        if (choice10)
+            cnt++;
+        else
+            choice10 = null;
 
-            var data = {
-                    surveyId: $('#survey_id').val(),
-                    content: $('#question-content').val(),
-                    choicable: $('#choice_true').is(':checked'),
-                    multiple: $('#multiple').is(':checked'),
-                    etcAnswer: $('#etc_answer').is(':checked'),
-                    necessaryAns: $('#necessary').is(':checked'),
-                    choiceCnt: cnt,
-                    choice1: choice1,
-                    choice2: choice2,
-                    choice3: choice3,
-                    choice4: choice4,
-                    choice5: choice5,
-                    choice6: choice6,
-                    choice7: choice7,
-                    choice8: choice8,
-                    choice9: choice9,
-                    choice10: choice10
-                };
+        var data = {
+                surveyId: $('#survey_id').val(),
+                content: $('#question-content').val(),
+                choicable: $('#choice_true').is(':checked'),
+                multiple: $('#multiple').is(':checked'),
+                etcAnswer: $('#etc_answer').is(':checked'),
+                necessaryAns: $('#necessary').is(':checked'),
+                choiceCnt: cnt,
+                choice1: choice1,
+                choice2: choice2,
+                choice3: choice3,
+                choice4: choice4,
+                choice5: choice5,
+                choice6: choice6,
+                choice7: choice7,
+                choice8: choice8,
+                choice9: choice9,
+                choice10: choice10
+            };
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/v1/questions',
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data)
-                }).done(function() {
-                    window.location.href = '/questions/save';
-                }).fail(function (error) {
-                    alert(JSON.stringify(error));
-                });
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/questions',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                window.location.href = '/questions/save';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
     },
 
     createLastQuestion : function () {
@@ -312,17 +330,49 @@ var main = {
                         choice10: choice10
                     };
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/v1/questions',
-                        dataType: 'json',
-                        contentType: 'application/json; charset=utf-8',
-                        data: JSON.stringify(data)
-                    }).done(function() {
-                        window.location.href = '/posts/save';
-                    }).fail(function (error) {
-                        alert(JSON.stringify(error));
-                    });
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/v1/questions',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).done(function() {
+                    window.location.href = '/posts/save';
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+        },
+        createAnswer : function () {
+            var questionCnt = $('#question-size').val();
+            for(var i = 0; i < questionCnt; i++) {
+                $('.radio-select .ans1').attr("name", "select-one"+"-i");
+                var data = {
+                    questionId : $('.question-id').eq(i).val(),
+                    answer1 : $('.ans1').eq(i).is(':checked'),
+                    answer2 : $('.ans2').eq(i).is(':checked'),
+                    answer3 : $('.ans3').eq(i).is(':checked'),
+                    answer4 : $('.ans4').eq(i).is(':checked'),
+                    answer5 : $('.ans5').eq(i).is(':checked'),
+                    answer6 : $('.ans6').eq(i).is(':checked'),
+                    answer7 : $('.ans7').eq(i).is(':checked'),
+                    answer8 : $('.ans8').eq(i).is(':checked'),
+                    answer9 : $('.ans9').eq(i).is(':checked'),
+                    answer10 : $('.ans10').eq(i).is(':checked'),
+                    essayAnswer : $('.essay-content').eq(i).val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/v1/answers',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).done(function() {
+                    window.location.href = '/';
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+            }
         }
 };
 

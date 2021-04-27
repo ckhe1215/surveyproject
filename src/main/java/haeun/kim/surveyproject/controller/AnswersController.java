@@ -21,6 +21,7 @@ public class AnswersController {
     @GetMapping("/answers/save/{survey_id}")
     public String answersSave(@PathVariable Long survey_id, Model model){
         model.addAttribute("questions", questionsService.findBySurveyId(survey_id));
+        model.addAttribute("questionsSize", questionsService.findBySurveyId(survey_id).size());
         return "answer-save";
     }
 }

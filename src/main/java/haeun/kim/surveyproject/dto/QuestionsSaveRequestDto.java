@@ -1,7 +1,6 @@
 package haeun.kim.surveyproject.dto;
 
 import haeun.kim.surveyproject.domain.Questions;
-import haeun.kim.surveyproject.domain.Surveys;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

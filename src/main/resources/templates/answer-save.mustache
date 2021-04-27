@@ -1,55 +1,92 @@
 {{>layout/header}}
 
 <article>
+    <input type="hidden" id="question-size" value="{{questionsSize}}"/>
     {{#questions}}
         <div class = "card">
             <div class="card-body">
-                <h5 class = "card-title">{{id}}. {{content}}</h5>
+                <input type="hidden" class="question-id" value="{{id}}"/>
+                <h5 class = "card-title">{{content}}</h5>
                 {{#necessaryAns}}
-                    <p>*</p>
+                    <p>*필수 응답항목입니다.</p>
                 {{/necessaryAns}}
 
                 {{^choicable}}
                     <div id ="essay-answer">
-                        <textarea class = "form-control" placeholder="내용을 입력하세요"></textarea>
+                        <textarea class="form-control essay-content" placeholder="내용을 입력하세요"></textarea>
                     </div>
+                    <input type="hidden" class="ans1"/>
+                    <input type="hidden" class="ans2"/>
+                    <input type="hidden" class="ans3"/>
+                    <input type="hidden" class="ans4"/>
+                    <input type="hidden" class="ans5"/>
+                    <input type="hidden" class="ans6"/>
+                    <input type="hidden" class="ans7"/>
+                    <input type="hidden" class="ans8"/>
+                    <input type="hidden" class="ans9"/>
+                    <input type="hidden" class="ans10"/>
                 {{/choicable}}
 
                 {{#choicable}}
                     {{!choiceCnt}}
                     {{#multiple}}
-                        {{#choice1}}<label><input class="form-check-input" type="checkbox"/>{{choice1}}</label><br>{{/choice1}}
-                        {{#choice2}}<label><input class="form-check-input" type="checkbox"/>{{choice2}}</label><br>{{/choice2}}
-                        {{#choice3}}<label><input class="form-check-input" type="checkbox"/>{{choice3}}</label><br>{{/choice3}}
-                        {{#choice4}}<label><input class="form-check-input" type="checkbox"/>{{choice4}}</label><br>{{/choice4}}
-                        {{#choice5}}<label><input class="form-check-input" type="checkbox"/>{{choice5}}</label><br>{{/choice5}}
-                        {{#choice6}}<label><input class="form-check-input" type="checkbox"/>{{choice6}}</label><br>{{/choice6}}
-                        {{#choice7}}<label><input class="form-check-input" type="checkbox"/>{{choice7}}</label><br>{{/choice7}}
-                        {{#choice8}}<label><input class="form-check-input" type="checkbox"/>{{choice8}}</label><br>{{/choice8}}
-                        {{#choice9}}<label><input class="form-check-input" type="checkbox"/>{{choice9}}</label><br>{{/choice9}}
-                        {{#choice10}}<label><input class="form-check-input" type="checkbox"/>{{choice10}}</label><br>{{/choice10}}
+                        {{#choice1}}<label><input class="form-check-input ans1" type="checkbox"/>{{choice1}}</label><br>{{/choice1}}
+                        {{^choice1}}<input class="form-check-input ans1" type="hidden"/>{{/choice1}}
+                        {{#choice2}}<label><input class="form-check-input ans2" type="checkbox"/>{{choice2}}</label><br>{{/choice2}}
+                        {{^choice2}}<input class="form-check-input ans2" type="hidden"/>{{/choice2}}
+                        {{#choice3}}<label><input class="form-check-input ans3" type="checkbox"/>{{choice3}}</label><br>{{/choice3}}
+                        {{^choice3}}<input class="form-check-input ans3" type="hidden"/>{{/choice3}}
+                        {{#choice4}}<label><input class="form-check-input ans4" type="checkbox"/>{{choice4}}</label><br>{{/choice4}}
+                        {{^choice4}}<input class="form-check-input ans4" type="hidden"/>{{/choice4}}
+                        {{#choice5}}<label><input class="form-check-input ans5" type="checkbox"/>{{choice5}}</label><br>{{/choice5}}
+                        {{^choice5}}<input class="form-check-input ans5" type="hidden"/>{{/choice5}}
+                        {{#choice6}}<label><input class="form-check-input ans6" type="checkbox"/>{{choice6}}</label><br>{{/choice6}}
+                        {{^choice6}}<input class="form-check-input ans6" type="hidden"/>{{/choice6}}
+                        {{#choice7}}<label><input class="form-check-input ans7" type="checkbox"/>{{choice7}}</label><br>{{/choice7}}
+                        {{^choice7}}<input class="form-check-input ans7" type="hidden"/>{{/choice7}}
+                        {{#choice8}}<label><input class="form-check-input ans8" type="checkbox"/>{{choice8}}</label><br>{{/choice8}}
+                        {{^choice8}}<input class="form-check-input ans8" type="hidden"/>{{/choice8}}
+                        {{#choice9}}<label><input class="form-check-input ans9" type="checkbox"/>{{choice9}}</label><br>{{/choice9}}
+                        {{^choice9}}<input class="form-check-input ans9" type="hidden"/>{{/choice9}}
+                        {{#choice10}}<label><input class="form-check-input ans10" type="checkbox"/>{{choice10}}</label><br>{{/choice10}}
+                        {{^choice10}}<input class="form-check-input ans10" type="hidden"/>{{/choice10}}
                     {{/multiple}}
 
                     {{^multiple}}
-                        {{#choice1}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice1}}</label><br>{{/choice1}}
-                        {{#choice2}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice2}}</label><br>{{/choice2}}
-                        {{#choice3}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice3}}</label><br>{{/choice3}}
-                        {{#choice4}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice4}}</label><br>{{/choice4}}
-                        {{#choice5}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice5}}</label><br>{{/choice5}}
-                        {{#choice6}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice6}}</label><br>{{/choice6}}
-                        {{#choice7}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice7}}</label><br>{{/choice7}}
-                        {{#choice8}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice8}}</label><br>{{/choice8}}
-                        {{#choice9}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice9}}</label><br>{{/choice9}}
-                        {{#choice10}}<label><input name = "select-one" class="form-check-input" type="radio"/>{{choice10}}</label><br>{{/choice10}}
+                        {{#choice1}}<label><input name="select-one" class="form-check-input radio-select ans1" type="radio"/>{{choice1}}</label><br>{{/choice1}}
+                        {{^choice1}}<input name="select-one" class="form-check-input radio-select ans1" type="hidden"/>{{/choice1}}
+                        {{#choice2}}<label><input name="select-one" class="form-check-input radio-select ans2" type="radio"/>{{choice2}}</label><br>{{/choice2}}
+                        {{^choice2}}<input name="select-one" class="form-check-input radio-select ans2" type="hidden"/>{{/choice2}}
+                        {{#choice3}}<label><input name="select-one" class="form-check-input radio-select ans3" type="radio"/>{{choice3}}</label><br>{{/choice3}}
+                        {{^choice3}}<input name="select-one" class="form-check-input radio-select ans3" type="hidden"/>{{/choice3}}
+                        {{#choice4}}<label><input name="select-one" class="form-check-input radio-select ans4" type="radio"/>{{choice4}}</label><br>{{/choice4}}
+                        {{^choice4}}<input name="select-one" class="form-check-input radio-select ans4" type="hidden"/>{{/choice4}}
+                        {{#choice5}}<label><input name="select-one" class="form-check-input radio-select ans5" type="radio"/>{{choice5}}</label><br>{{/choice5}}
+                        {{^choice5}}<input name="select-one" class="form-check-input radio-select ans5" type="hidden"/>{{/choice5}}
+                        {{#choice6}}<label><input name="select-one" class="form-check-input radio-select ans6" type="radio"/>{{choice6}}</label><br>{{/choice6}}
+                        {{^choice6}}<input name="select-one" class="form-check-input radio-select ans6" type="hidden"/>{{/choice6}}
+                        {{#choice7}}<label><input name="select-one" class="form-check-input radio-select ans7" type="radio"/>{{choice7}}</label><br>{{/choice7}}
+                        {{^choice7}}<input name="select-one" class="form-check-input radio-select ans7" type="hidden"/>{{/choice7}}
+                        {{#choice8}}<label><input name="select-one" class="form-check-input radio-select ans8" type="radio"/>{{choice8}}</label><br>{{/choice8}}
+                        {{^choice8}}<input name="select-one" class="form-check-input radio-select ans8" type="hidden"/>{{/choice8}}
+                        {{#choice9}}<label><input name="select-one" class="form-check-input radio-select ans9" type="radio"/>{{choice9}}</label><br>{{/choice9}}
+                        {{^choice9}}<input name="select-one" class="form-check-input radio-select ans9" type="hidden"/>{{/choice9}}
+                        {{#choice10}}<label><input name="select-one" class="form-check-input radio-select ans10" type="radio"/>{{choice10}}</label><br>{{/choice10}}
+                        {{^choice10}}<input name="select-one" class="form-check-input radio-select ans10" type="hidden"/>{{/choice10}}
                     {{/multiple}}
 
                     {{#etcAnswer}}
-                        기타 <input type = "text" class = "form-control"/>
+                        기타 <input type="text" class="form-control essay-content"/>
+                    {{/etcAnswer}}
+                    {{^etcAnswer}}
+                        <input type="hidden" class="essay-content"/>
                     {{/etcAnswer}}
                 {{/choicable}}
             </div>
         </div>
         <br>
     {{/questions}}
+
+    <button type="button" class="btn btn-primary" id="btn-answer-save">제출하기</button>
 </article>
 {{>layout/footer}}
