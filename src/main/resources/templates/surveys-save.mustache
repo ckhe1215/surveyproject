@@ -9,9 +9,19 @@
         </div>
         <br>
 
+        주제 분류<br>
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">선택</button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">인문학</a></li>
+            <li><a class="dropdown-item" href="#">사회과학</a></li>
+            <li><a class="dropdown-item" href="#">자연과학</a></li>
+            <li><a class="dropdown-item" href="#">공학</a></li>
+            <li><a class="dropdown-item" href="#">예술</a></li>
+        </ul>
         <!--작성자 이메일-->
         <input type="hidden" id="user_email" value="{{userEmail}}">
     </form>
+    <br><br><br><br><br><br><br><br><br><br>
     <button type="button" class="btn btn-danger" id="btn-create-survey">질문 추가</button>
 </article>
 {{>layout/footer}}

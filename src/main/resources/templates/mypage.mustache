@@ -1,0 +1,35 @@
+{{>layout/header}}
+<article>
+    <div class = "card">
+        <div class="card-body">
+            <strong>{{user.name}}</strong> 회원님<br>
+            이메일 : {{user.email}} <br>
+            포인트 : {{user.point}}
+        </div>
+    </div>
+
+    <br>
+    <h5>나의 설문</h5>
+    <table id = "survey-list" class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th style="width:60px">번호</th>
+            <th>제목</th>
+            <th style="width:100px">편집하기</th>
+            <th style="width:100px">결과확인</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#surveys}}
+            <tr>
+                <td id = "row_id">{{id}}</td>
+                <td>{{title}}</td>
+                <td><a href="#">편집하기</a></td>
+                <td><a href="/surveys/result/{{id}}">결과보기</a></td>
+            </tr>
+        {{/surveys}}
+        </tbody>
+    </table>
+
+</article>
+{{>layout/footer}}

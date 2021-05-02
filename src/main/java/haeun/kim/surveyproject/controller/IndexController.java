@@ -30,6 +30,15 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/mypage")
+    public String mypage(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("surveys", surveysService.findByUser(user.getEmail()));
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "mypage";
+    }
+
     @GetMapping("/posts/save")
     public String postsSave(Model model, @LoginUser SessionUser user) {
         if (user != null) {

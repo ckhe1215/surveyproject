@@ -18,4 +18,10 @@ public class SurveysController {
         }
         return "surveys-save";
     }
+
+    @GetMapping("/surveys/result/{id}")
+    public String surveysResult(Model model) {
+
+        return "surveys-result";
+    }
 }
