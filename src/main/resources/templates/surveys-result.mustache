@@ -1,3 +1,11 @@
 {{>layout/header}}
+<article>
+    {{#questionList}}
+        {{content}}
+    {{/questionList}}
 
+    {{#answerList}}
+        {{essayAnswer}}
+    {{/answerList}}
+</article>
 {{>layout/footer}}

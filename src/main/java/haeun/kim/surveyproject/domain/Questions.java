@@ -30,23 +30,14 @@ public class Questions extends BaseTimeEntity{
     private int choiceCnt; // 객관식 답안 갯수 (max : 10)
 
     private String choice1; // 객관식 보기 1번
-
     private String choice2;
-
     private String choice3;
-
     private String choice4;
-
     private String choice5;
-
     private String choice6;
-
     private String choice7;
-
     private String choice8;
-
     private String choice9;
-
     private String choice10;
 
     @Builder

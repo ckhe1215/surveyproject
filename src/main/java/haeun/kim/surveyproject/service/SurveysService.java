@@ -1,6 +1,8 @@
 package haeun.kim.surveyproject.service;
 
+import haeun.kim.surveyproject.domain.Posts;
 import haeun.kim.surveyproject.domain.Surveys;
+import haeun.kim.surveyproject.dto.PostsResponseDto;
 import haeun.kim.surveyproject.dto.SurveysListResponseDto;
 import haeun.kim.surveyproject.dto.SurveysResponseDto;
 import haeun.kim.surveyproject.dto.SurveysSaveRequestDto;
