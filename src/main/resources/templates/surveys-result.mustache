@@ -1,11 +1,33 @@
 {{>layout/header}}
 <article>
+
+    <input type="hidden" value="{{questionSize}}" class="questionSize"/>
+    <input type="hidden" value="{{answerSize}}" class="answerSize"/>
     {{#questionList}}
-        {{content}}
+        <input type="hidden" value="{{id}}" class="getId"/>
     {{/questionList}}
 
-    {{#answerList}}
-        {{essayAnswer}}
-    {{/answerList}}
+    {{#questionList}}
+        <div class = "oneQuestion">
+            {{content}}<br>
+            {{#answerList}}
+                <div style="display:none" class="oneAnswer{{questionId}}">
+                    {{answer1}}
+                    {{answer2}}
+                    {{answer3}}
+                    {{answer4}}
+                    {{answer5}}
+                    {{answer6}}
+                    {{answer7}}
+                    {{answer8}}
+                    {{answer9}}
+                    {{answer10}}<br>
+                    {{essayAnswer}}
+                </div>
+            {{/answerList}}
+        </div>
+    {{/questionList}}
+
+
 </article>
 {{>layout/footer}}

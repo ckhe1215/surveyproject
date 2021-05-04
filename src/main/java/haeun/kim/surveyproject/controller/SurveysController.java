@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -42,7 +41,9 @@ public class SurveysController {
         }
         // 답들을 모델에 저장하기
         model.addAttribute("questionList", questionList);
+        model.addAttribute("questionSize", questionList.size());
         model.addAttribute("answerList", answerList);
+        model.addAttribute("answerSize", answerList.size());
 
         return "surveys-result";
     }

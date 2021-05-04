@@ -11,7 +11,6 @@ for(var i = 0; i < qCnt; i++) {
     $("form-check-input, .ans8").eq(i).attr("name", "select-one-"+(i+1));
     $("form-check-input, .ans9").eq(i).attr("name", "select-one-"+(i+1));
     $("form-check-input, .ans10").eq(i).attr("name", "select-one-"+(i+1));
-    console.log("select-one-"+(i+1));
 }
 
 var main = {
