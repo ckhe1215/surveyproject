@@ -345,6 +345,9 @@ var main = {
             var questionCnt = $('#question-size').val();
             for(var i = 0; i < questionCnt; i++) {
                 $('.radio-select .ans1').attr("name", "select-one"+"-i");
+                var essayAnswer = $('.essay-content').eq(i).val();
+                if (!essayAnswer)
+                    essayAnswer = null;
                 var data = {
                     questionId : $('.question-id').eq(i).val(),
                     answer1 : $('.ans1').eq(i).is(':checked'),
@@ -357,7 +360,7 @@ var main = {
                     answer8 : $('.ans8').eq(i).is(':checked'),
                     answer9 : $('.ans9').eq(i).is(':checked'),
                     answer10 : $('.ans10').eq(i).is(':checked'),
-                    essayAnswer : $('.essay-content').eq(i).val()
+                    essayAnswer : essayAnswer
                 };
 
                 $.ajax({

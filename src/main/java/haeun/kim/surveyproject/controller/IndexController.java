@@ -33,9 +33,7 @@ public class IndexController {
     @GetMapping("/mypage")
     public String mypage(Model model, @LoginUser SessionUser user) {
         model.addAttribute("surveys", surveysService.findByUser(user.getEmail()));
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
+        model.addAttribute("user", user);
         return "mypage";
     }
 

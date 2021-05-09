@@ -8,24 +8,63 @@
     {{/questionList}}
 
     {{#questionList}}
-        <div class = "oneQuestion">
-            {{content}}<br>
-            {{#answerList}}
-                <div style="display:none" class="oneAnswer{{questionId}}">
-                    {{answer1}}
-                    {{answer2}}
-                    {{answer3}}
-                    {{answer4}}
-                    {{answer5}}
-                    {{answer6}}
-                    {{answer7}}
-                    {{answer8}}
-                    {{answer9}}
-                    {{answer10}}<br>
-                    {{essayAnswer}}
-                </div>
-            {{/answerList}}
+        <div class="card">
+            <div class = "oneQuestion card-body">
+                <h4>{{content}}</h4>
+                <input type="hidden" class="choiceCntOf{{id}}" value="{{choiceCnt}}"/>
+                {{#choice1}}
+                    <h5 class="choice1of{{id}}">1. {{choice1}}</h5>
+                {{/choice1}}
+                {{#choice2}}
+                    <h5 class="choice2of{{id}}">2. {{choice2}}</h5>
+                {{/choice2}}
+                {{#choice3}}
+                    <h5 class="choice3of{{id}}">3. {{choice3}}</h5>
+                {{/choice3}}
+                {{#choice4}}
+                    <h5 class="choice4of{{id}}">4. {{choice4}}</h5>
+                {{/choice4}}
+                {{#choice5}}
+                    <h5 class="choice5of{{id}}">5. {{choice5}}</h5>
+                {{/choice5}}
+                {{#choice6}}
+                    <h5 class="choice6of{{id}}">6. {{choice6}}</h5>
+                {{/choice6}}
+                {{#choice7}}
+                    <h5 class="choice7of{{id}}">7. {{choice7}}</h5>
+                {{/choice7}}
+                {{#choice8}}
+                    <h5 class="choice8of{{id}}">8. {{choice8}}</h5>
+                {{/choice8}}
+                {{#choice9}}
+                    <h5 class="choice9of{{id}}">9. {{choice9}}</h5>
+                {{/choice9}}
+                {{#choice10}}
+                    <h5 class="choice10of{{id}}">10. {{choice10}}</h5>
+                {{/choice10}}
+                {{#choicable}}
+                    <canvas style="margin:0 auto" class="result{{id}}" width="400" height="400"></canvas>
+                {{/choicable}}
+                {{#answerList}}
+                    <div style="display:none" class="oneAnswer{{questionId}}">
+                        <input type="hidden" class="answer1" value="{{answer1}}"/>
+                        <input type="hidden" class="answer2" value="{{answer2}}"/>
+                        <input type="hidden" class="answer3" value="{{answer3}}"/>
+                        <input type="hidden" class="answer4" value="{{answer4}}"/>
+                        <input type="hidden" class="answer5" value="{{answer5}}"/>
+                        <input type="hidden" class="answer6" value="{{answer6}}"/>
+                        <input type="hidden" class="answer7" value="{{answer7}}"/>
+                        <input type="hidden" class="answer8" value="{{answer8}}"/>
+                        <input type="hidden" class="answer9" value="{{answer9}}"/>
+                        <input type="hidden" class="answer10" value="{{answer10}}"/>
+                        {{#essayAnswer}}
+                            {{essayAnswer}}
+                        {{/essayAnswer}}
+                    </div>
+                {{/answerList}}
+            </div>
         </div>
+        <br>
     {{/questionList}}
 
 
