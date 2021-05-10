@@ -43,4 +43,11 @@ public class SurveysService {
 
         return new SurveysResponseDto(entity);
     }
+
+    public SurveysResponseDto findById(Long id){
+        Surveys entity = surveysRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 설문이 없습니다. id=" + id));
+
+        return new SurveysResponseDto(entity);
+    }
 }

@@ -29,8 +29,15 @@ public class QuestionsController {
 
     @GetMapping("/questions/update/{id}")
     public String questionsUpdate(@PathVariable Long id, Model model) {
+        model.addAttribute("surveyId", id);
         model.addAttribute("questions", questionsService.findBySurveyId(id));
         model.addAttribute("questionsSize", questionsService.findBySurveyId(id).size());
         return "questions-update";
+    }
+
+    @GetMapping("/questions/add/{id}")
+    public String questionsAdd(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        model.addAttribute("Survey", surveysService.findById(id));
+        return "questions-add";
     }
 }

@@ -62,6 +62,10 @@ var main = {
             _this.deleteSurvey(id);
         })
 
+        $('#btn-additional-question').on('click', function () {
+            _this.createAdditionalQuestion();
+        })
+
         $('#survey-list').on('click', '.clickable-row', function(event, row) {
           if($(this).hasClass('table-active')){
               $(this).removeClass('table-active');
@@ -351,6 +355,94 @@ var main = {
                     alert(JSON.stringify(error));
                 });
         },
+
+        createAdditionalQuestion : function () {
+            var surveyId = $('#survey_id').val();
+            var choice1 = $('#choice1').val();
+            var choice2 = $('#choice2').val();
+            var choice3 = $('#choice3').val();
+            var choice4 = $('#choice4').val();
+            var choice5 = $('#choice5').val();
+            var choice6 = $('#choice6').val();
+            var choice7 = $('#choice7').val();
+            var choice8 = $('#choice8').val();
+            var choice9 = $('#choice9').val();
+            var choice10 = $('#choice10').val();
+            var cnt = 0;
+            if (choice1)
+                cnt++;
+            else
+                choice1 = null;
+            if (choice2)
+                cnt++;
+            else
+                choice2 = null;
+            if (choice3)
+                cnt++;
+            else
+                choice3 = null;
+            if (choice4)
+                cnt++;
+            else
+                choice4 = null;
+            if (choice5)
+                cnt++;
+            else
+                choice5 = null;
+            if (choice6)
+                cnt++;
+            else
+                choice6 = null;
+            if (choice7)
+                cnt++;
+            else
+                choice7 = null;
+            if (choice8)
+                cnt++;
+            else
+                choice8 = null;
+            if (choice9)
+                cnt++;
+            else
+                choice9 = null;
+            if (choice10)
+                cnt++;
+            else
+                choice10 = null;
+
+            var data = {
+                    surveyId: $('#survey_id').val(),
+                    content: $('#question-content').val(),
+                    choicable: $('#choice_true').is(':checked'),
+                    multiple: $('#multiple').is(':checked'),
+                    etcAnswer: $('#etc_answer').is(':checked'),
+                    necessaryAns: $('#necessary').is(':checked'),
+                    choiceCnt: cnt,
+                    choice1: choice1,
+                    choice2: choice2,
+                    choice3: choice3,
+                    choice4: choice4,
+                    choice5: choice5,
+                    choice6: choice6,
+                    choice7: choice7,
+                    choice8: choice8,
+                    choice9: choice9,
+                    choice10: choice10
+                };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/questions',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                window.location.href = '/questions/update/' + surveyId;
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
         createAnswer : function () {
             var questionCnt = $('#question-size').val();
             for(var i = 0; i < questionCnt; i++) {
