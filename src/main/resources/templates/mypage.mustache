@@ -24,7 +24,10 @@
             <tr>
                 <td id = "row_id">{{id}}</td>
                 <td>{{title}}</td>
-                <td><a href="#">편집하기</a></td>
+                <td>
+                    <a href="/questions/update/{{id}}">수정</a>
+                    <a href="#" id="{{id}}" class="btn-survey-delete">삭제</a>
+                </td>
                 <td><a href="/surveys/result/{{id}}">결과보기</a></td>
             </tr>
         {{/surveys}}

@@ -1,8 +1,6 @@
 package haeun.kim.surveyproject.service;
 
-import haeun.kim.surveyproject.domain.Posts;
 import haeun.kim.surveyproject.domain.Surveys;
-import haeun.kim.surveyproject.dto.PostsResponseDto;
 import haeun.kim.surveyproject.dto.SurveysListResponseDto;
 import haeun.kim.surveyproject.dto.SurveysResponseDto;
 import haeun.kim.surveyproject.dto.SurveysSaveRequestDto;
@@ -23,6 +21,14 @@ public class SurveysService {
     @Transactional
     public Long save(SurveysSaveRequestDto requestDto) {
         return surveysRepository.save(requestDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Surveys surveys = surveysRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 설문이 없습니다. id=" + id));
+
+        surveysRepository.delete(surveys);
     }
 
     @Transactional(readOnly = true)

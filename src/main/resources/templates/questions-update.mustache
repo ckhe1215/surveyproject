@@ -1,5 +1,4 @@
 {{>layout/header}}
-
 <article>
     <input type="hidden" id="question-size" value="{{questionsSize}}"/>
     {{#questions}}
@@ -81,11 +80,12 @@
                         <input type="hidden" class="essay-content"/>
                     {{/etcAnswer}}
                 {{/choicable}}
+                <br>
+                <button type="button" class="btn btn-danger btn-question-delete" id="{{id}}">삭제하기</button>
             </div>
         </div>
         <br>
     {{/questions}}
-
-    <button type="button" class="btn btn-primary" id="btn-answer-save">제출하기</button>
+    <a href="/mypage" class="btn btn-secondary">뒤로</a>
 </article>
 {{>layout/footer}}

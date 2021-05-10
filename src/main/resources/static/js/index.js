@@ -52,6 +52,16 @@ var main = {
             _this.createAnswer();
         })
 
+        $('.btn-question-delete').on('click', function () {
+            var id = $(this).attr("id");
+            _this.deleteQuestion(id);
+        })
+
+        $('.btn-survey-delete').on('click', function () {
+            var id = $(this).attr("id");
+            _this.deleteSurvey(id);
+        })
+
         $('#survey-list').on('click', '.clickable-row', function(event, row) {
           if($(this).hasClass('table-active')){
               $(this).removeClass('table-active');
@@ -375,6 +385,34 @@ var main = {
                     alert(JSON.stringify(error));
                 });
             }
+        },
+
+        deleteQuestion : function(id) {
+            $.ajax({
+                 type: 'DELETE',
+                 url: '/api/v1/questions/' + id,
+                 dataType: 'json',
+                 contentType: 'application/json; charset=utf-8',
+            }).done(function() {
+                alert('질문이 삭제되었습니다.');
+                location.reload();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
+        deleteSurvey : function(id) {
+            $.ajax({
+                 type: 'DELETE',
+                 url: '/api/v1/surveys/' + id,
+                 dataType: 'json',
+                 contentType: 'application/json; charset=utf-8',
+            }).done(function() {
+                alert('설문이 삭제되었습니다.');
+                location.reload();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         }
 };
 

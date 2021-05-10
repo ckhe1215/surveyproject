@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class AnswersResponseDto {
+    private Long id;
     private Long questionId;
     private Boolean answer1; // 객관식 답
     private Boolean answer2;
@@ -19,6 +20,7 @@ public class AnswersResponseDto {
     private String essayAnswer; // 주관식 답
 
     public AnswersResponseDto(Answers entity) {
+        this.id = entity.getId();
         this.questionId = entity.getQuestionId();
         this.answer1 = entity.getAnswer1();
         this.answer2 = entity.getAnswer2();
