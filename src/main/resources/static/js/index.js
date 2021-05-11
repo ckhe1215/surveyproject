@@ -67,11 +67,11 @@ var main = {
         })
 
         $('#survey-list').on('click', '.clickable-row', function(event, row) {
-          if($(this).hasClass('table-active')){
-              $(this).removeClass('table-active');
-          } else {
-              $(this).addClass('table-active').siblings().removeClass('table-active');
-          }
+            if($(this).hasClass('table-active')){
+                $(this).removeClass('table-active');
+            } else {
+                $(this).addClass('table-active').siblings().removeClass('table-active');
+            }
         });
 
         $('#survey-list tr').on('click', function(event, row) {
