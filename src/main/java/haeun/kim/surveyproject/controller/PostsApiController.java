@@ -1,9 +1,12 @@
 package haeun.kim.surveyproject.controller;
 
+import haeun.kim.surveyproject.config.auth.LoginUser;
+import haeun.kim.surveyproject.config.auth.dto.SessionUser;
 import haeun.kim.surveyproject.dto.PostsResponseDto;
 import haeun.kim.surveyproject.dto.PostsSaveRequestDto;
 import haeun.kim.surveyproject.dto.PostsUpdateRequestDto;
 import haeun.kim.surveyproject.service.PostsService;
+import haeun.kim.surveyproject.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class PostsApiController {
 
     private final PostsService postsService;
+    private final UsersService usersService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
+    public Long save(@RequestBody PostsSaveRequestDto requestDto, @LoginUser SessionUser user) {
+        usersService.earnPoints(user.getEmail(), -10);
         return postsService.save(requestDto);
     }
 

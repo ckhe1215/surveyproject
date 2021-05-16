@@ -17,7 +17,8 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
-            _this.save();
+            if (confirm("10포인트가 차감됩니다. 업로드하시겠습니까?"))
+                _this.save();
         });
 
         $('#btn-update').on('click', function () {
@@ -109,18 +110,23 @@ var main = {
             isExpired: false
         };
 
-        $.ajax({
-            type: 'POST',
-            url: '/api/v1/posts',
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('글이 등록되었습니다.');
-            window.location.href = '/';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
+        if (parseInt($('#user-point').val()) >= 10)
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/posts',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                alert('글이 등록되었습니다.');
+                window.location.href = '/';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        }
+        else
+            alert('포인트가 부족합니다.');
     },
 
     update : function () {

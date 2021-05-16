@@ -1,7 +1,6 @@
 package haeun.kim.surveyproject.repository;
 
 import haeun.kim.surveyproject.domain.Surveys;
-import haeun.kim.surveyproject.domain.user.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -42,6 +42,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("userPoint", user.getPoint());
             model.addAttribute("mySurveys", surveysService.findByUser(user.getEmail()));
         }
         return "posts-save";
