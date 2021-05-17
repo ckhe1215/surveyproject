@@ -26,18 +26,19 @@
             <td>마감일자</td>
             <td>{{post.expiredDate}}</td>
         </tr>
-        <tr>
-            <td>마감여부</td>
-            <td>{{post.isExpired}}</td>
-        </tr>
     </table>
 
     <input type="hidden" id="detail_user_email" value="{{userEmail}}">
     <input type="hidden" id="detail_author_email" value="{{post.authorEmail}}">
 
-    <div id="add-reply">
-        <a href="/answers/save/{{post.surveyId}}" role="button" class="btn btn-success">참여하기</a>
-    </div>
+    {{#expired}}
+        <div id="add-reply">
+            <a href="/answers/save/{{post.surveyId}}" role="button" class="btn btn-success">참여하기</a>
+        </div>
+    {{/expired}}
+    {{^expired}}
+        <h5 id = "expired-warning">해당 설문은 마감되었습니다.</h5>
+    {{/expired}}
 
     <div id="post-control">
         <a href="/" role="button" class="btn btn-secondary">뒤로</a>

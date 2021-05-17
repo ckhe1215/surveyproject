@@ -14,15 +14,13 @@ public class PostsUpdateRequestDto {
     private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
-    private boolean isExpired;
 
     @Builder
-    public PostsUpdateRequestDto(String title, String content, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
+    public PostsUpdateRequestDto(String title, String content, Long surveyId, int answerGoal, LocalDateTime expiredDate) {
         this.title = title;
         this.content = content;
         this.surveyId = surveyId;
         this.answerGoal = answerGoal;
         this.expiredDate = expiredDate;
-        this.isExpired = isExpired;
     }
 }

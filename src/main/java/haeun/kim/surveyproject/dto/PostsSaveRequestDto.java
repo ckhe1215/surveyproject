@@ -17,10 +17,9 @@ public class PostsSaveRequestDto {
     private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
-    private boolean isExpired;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, String authorEmail, Long surveyId, int answerGoal, LocalDateTime expiredDate, boolean isExpired) {
+    public PostsSaveRequestDto(String title, String content, String author, String authorEmail, Long surveyId, int answerGoal, LocalDateTime expiredDate) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -28,7 +27,6 @@ public class PostsSaveRequestDto {
         this.surveyId = surveyId;
         this.answerGoal = answerGoal;
         this.expiredDate = expiredDate;
-        this.isExpired = isExpired;
     }
     public Posts toEntity() {
         return Posts.builder()
@@ -39,7 +37,6 @@ public class PostsSaveRequestDto {
                 .surveyId(surveyId)
                 .answerGoal(answerGoal)
                 .expiredDate(expiredDate)
-                .isExpired(isExpired)
                 .build();
     }
 }

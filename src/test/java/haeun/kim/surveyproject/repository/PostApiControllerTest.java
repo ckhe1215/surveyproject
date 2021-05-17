@@ -70,7 +70,6 @@ public class PostApiControllerTest {
         Long surveyId = 12345L;
         int answerGoal = 200;
         LocalDateTime expiredDate = LocalDateTime.of(2020, 4, 4, 17, 54);
-        boolean isExpired = false;
 
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title(title)
@@ -79,7 +78,6 @@ public class PostApiControllerTest {
                 .surveyId(surveyId)
                 .answerGoal(answerGoal)
                 .expiredDate(expiredDate)
-                .isExpired(isExpired)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
@@ -103,7 +101,6 @@ public class PostApiControllerTest {
         assertThat(all.get(0).getSurveyId()).isEqualTo(surveyId);
         assertThat(all.get(0).getAnswerGoal()).isEqualTo(answerGoal);
         assertThat(all.get(0).getExpiredDate()).isEqualTo(expiredDate);
-        assertThat(all.get(0).isExpired()).isEqualTo(isExpired);
     }
 
     @Test
@@ -117,7 +114,6 @@ public class PostApiControllerTest {
                 .surveyId(12345L)
                 .answerGoal(200)
                 .expiredDate(LocalDateTime.of(2020, 4, 4, 17, 54))
-                .isExpired(false)
                 .build());
 
         Long updatedId = savedPosts.getId();
@@ -126,7 +122,6 @@ public class PostApiControllerTest {
         Long expectedSurveyId = 123456L;
         int expectedAnswerGoal = 500;
         LocalDateTime expectedExpiredDate = LocalDateTime.of(2020, 5, 4, 17, 54);
-        boolean expectedIsExpired = true;
 
         PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
                 .title(expectedTitle)
@@ -134,7 +129,6 @@ public class PostApiControllerTest {
                 .surveyId(expectedSurveyId)
                 .answerGoal(expectedAnswerGoal)
                 .expiredDate(expectedExpiredDate)
-                .isExpired(expectedIsExpired)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts/" + updatedId;
@@ -159,6 +153,5 @@ public class PostApiControllerTest {
         assertThat(all.get(0).getSurveyId()).isEqualTo(expectedSurveyId);
         assertThat(all.get(0).getAnswerGoal()).isEqualTo(expectedAnswerGoal);
         assertThat(all.get(0).getExpiredDate()).isEqualTo(expectedExpiredDate);
-        // assertThat(all.get(0).isExpired()).isEqualTo(expectedIsExpired);
     }
 }

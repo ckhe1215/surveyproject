@@ -29,7 +29,7 @@ public class PostsService {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+ id));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getSurveyId(), requestDto.getAnswerGoal(), requestDto.getExpiredDate(), requestDto.isExpired());
+        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getSurveyId(), requestDto.getAnswerGoal(), requestDto.getExpiredDate());
         return id;
     }
 

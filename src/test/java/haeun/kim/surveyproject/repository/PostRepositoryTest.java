@@ -44,7 +44,6 @@ public class PostRepositoryTest {
             .surveyId(surveyId)
             .answerGoal(answerGoal)
             .expiredDate(expiredDate)
-            .isExpired(isExpired)
             .build());
 
         // when
@@ -58,7 +57,6 @@ public class PostRepositoryTest {
         assertThat(posts.getSurveyId()).isEqualTo(surveyId);
         assertThat(posts.getAnswerGoal()).isEqualTo(answerGoal);
         assertThat(posts.getExpiredDate()).isEqualTo(expiredDate);
-        assertThat(posts.isExpired()).isEqualTo(isExpired);
     }
 
     @Test
@@ -72,7 +70,6 @@ public class PostRepositoryTest {
                 .surveyId(12345L)
                 .answerGoal(200)
                 .expiredDate(LocalDateTime.of(2020, 4, 4, 17, 54))
-                .isExpired(false)
                 .build());
 
         // when

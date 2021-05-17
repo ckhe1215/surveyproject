@@ -15,7 +15,6 @@ public class PostsResponseDto {
     private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
-    private boolean isExpired;
 
     public PostsResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -26,6 +25,5 @@ public class PostsResponseDto {
         this.surveyId = entity.getSurveyId();
         this.answerGoal = entity.getAnswerGoal();
         this.expiredDate = entity.getExpiredDate();
-        this.isExpired = entity.isExpired();
     }
 }
