@@ -55,14 +55,14 @@ public class IndexController {
         return "posts-save";
     }
 
-    @GetMapping("/posts/detail/{id}")
+    @GetMapping("/posts/detail/{id}") // 이 id는 설문 아이디가 아니라 게시글 아이디임 여기 수정해야됨
     public String postsDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         PostsResponseDto dto = postsService.findById(id);
         LocalDateTime currentDate = LocalDateTime.now();
         boolean expired = dto.getExpiredDate().isAfter(currentDate);
-
+        Long survey_id = dto.getSurveyId();
         //해당 설문이 가진 질문 찾기
-        List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(id);
+        List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(survey_id);
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());
         for(int i = 1; i < questionList.size(); i++)
