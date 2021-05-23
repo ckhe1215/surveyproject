@@ -50,6 +50,7 @@ var main = {
         })
 
         $('#btn-answer-save').on('click', function () {
+            _this.createParticipation();
             _this.createAnswer();
         })
 
@@ -446,6 +447,20 @@ var main = {
                 window.location.href = '/questions/update/' + surveyId;
             }).fail(function (error) {
                 alert(JSON.stringify(error));
+            });
+        },
+
+        createParticipation : function () {
+            var data = {
+                userEmail: $('#userEmail').val(),
+                surveyId: $('#surveyId').val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/participations',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
             });
         },
 

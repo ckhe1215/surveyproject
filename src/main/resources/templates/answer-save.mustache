@@ -1,6 +1,8 @@
 {{>layout/header}}
 
 <article>
+    <input type="hidden" id="surveyId" value="{{surveyId}}"/>
+    <input type="hidden" id="userEmail" value="{{userEmail}}"/>
     <input type="hidden" id="question-size" value="{{questionsSize}}"/>
     {{#questions}}
         <div class = "card">

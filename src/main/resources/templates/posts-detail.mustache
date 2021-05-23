@@ -32,13 +32,18 @@
     <input type="hidden" id="detail_author_email" value="{{post.authorEmail}}">
 
     {{#expired}}
-        <div id="add-reply">
-            <a href="/answers/save/{{post.surveyId}}" role="button" class="btn btn-success">참여하기</a>
-        </div>
+        {{^isParticipated}}
+            <div id="add-reply">
+                <a href="/answers/save/{{post.surveyId}}" role="button" class="btn btn-success">참여하기</a>
+            </div>
+        {{/isParticipated}}
     {{/expired}}
     {{^expired}}
         <h5 id = "expired-warning">해당 설문은 마감되었습니다.</h5>
     {{/expired}}
+    {{#isParticipated}}
+        <h5>이미 참여하신 설문입니다.</h5>
+    {{/isParticipated}}
 
     <div id="post-control">
         <a href="/" role="button" class="btn btn-secondary">뒤로</a>

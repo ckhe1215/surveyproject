@@ -2,13 +2,12 @@ package haeun.kim.surveyproject.controller;
 
 import haeun.kim.surveyproject.config.auth.LoginUser;
 import haeun.kim.surveyproject.config.auth.dto.SessionUser;
+import haeun.kim.surveyproject.domain.Participations;
 import haeun.kim.surveyproject.dto.AnswersResponseDto;
+import haeun.kim.surveyproject.dto.ParticipationsResponseDto;
 import haeun.kim.surveyproject.dto.PostsResponseDto;
 import haeun.kim.surveyproject.dto.QuestionsResponseDto;
-import haeun.kim.surveyproject.service.AnswersService;
-import haeun.kim.surveyproject.service.PostsService;
-import haeun.kim.surveyproject.service.QuestionsService;
-import haeun.kim.surveyproject.service.SurveysService;
+import haeun.kim.surveyproject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +26,7 @@ public class IndexController {
     private final SurveysService surveysService;
     private final QuestionsService questionsService;
     private final AnswersService answersService;
+    private final ParticipationsService participationsService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -60,7 +60,19 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         LocalDateTime currentDate = LocalDateTime.now();
         boolean expired = dto.getExpiredDate().isAfter(currentDate);
+        boolean isParticipated = false;
         Long survey_id = dto.getSurveyId();
+
+        // 사용자가 참여한 설문인지 확인
+        List<ParticipationsResponseDto> participationsList = participationsService.findBySurveyId(survey_id);
+        for (ParticipationsResponseDto participationsResponseDto : participationsList) {
+            if (participationsResponseDto.getUserEmail().equals(user.getEmail())) {
+                isParticipated = true;
+                break;
+            }
+        }
+        model.addAttribute("isParticipated", isParticipated);
+
         //해당 설문이 가진 질문 찾기
         List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(survey_id);
         // 질문들이 가진 답 찾기
