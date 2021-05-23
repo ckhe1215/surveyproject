@@ -4,7 +4,22 @@
         <div class="card-body">
             <strong>{{user.name}}</strong> 회원님<br>
             이메일 : {{user.email}} <br>
-            포인트 : {{user.point}}
+            포인트 : {{user.point}} <br>
+            관심 주제
+            {{^user.subject}}
+                <button class="btn btn-outline-secondary dropdown-toggle" id="select-subject" type="button" data-bs-toggle="dropdown" aria-expanded="false">선택</button>
+            {{/user.subject}}
+            {{#user.subject}}
+                <button class="btn btn-outline-secondary dropdown-toggle" id="select-subject" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{user.subject}}</button>
+            {{/user.subject}}
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">인문학</a></li>
+                <li><a class="dropdown-item">사회과학</a></li>
+                <li><a class="dropdown-item">자연과학</a></li>
+                <li><a class="dropdown-item">공학</a></li>
+                <li><a class="dropdown-item">예술</a></li>
+            </ul>
+            <button class="btn btn-success" id="update-subject">변경</button>
         </div>
     </div>
 

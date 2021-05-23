@@ -7,9 +7,11 @@ import lombok.Getter;
 public class SurveysListResponseDto {
     private Long id;
     private String title;
+    private String subject;
 
     public SurveysListResponseDto(Surveys entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
+        this.subject = entity.getSubject();
     }
 }

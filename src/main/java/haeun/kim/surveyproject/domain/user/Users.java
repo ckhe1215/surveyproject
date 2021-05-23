@@ -24,15 +24,19 @@ public class Users extends BaseTimeEntity {
     @Column
     private int point;
 
+    @Column
+    private String subject;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Builder
-    public Users(String name, String email, int point, Role role) {
+    public Users(String name, String email, int point, String subject, Role role) {
         this.name = name;
         this.email = email;
         this.point = point;
+        this.subject = subject;
         this.role = role;
     }
 
@@ -48,5 +52,10 @@ public class Users extends BaseTimeEntity {
     public int earnPoints(int num) {
         this.point += num;
         return this.point;
+    }
+
+    public String updateSubject(String subject){
+        this.subject = subject;
+        return this.subject;
     }
 }

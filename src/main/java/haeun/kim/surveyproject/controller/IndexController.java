@@ -3,10 +3,7 @@ package haeun.kim.surveyproject.controller;
 import haeun.kim.surveyproject.config.auth.LoginUser;
 import haeun.kim.surveyproject.config.auth.dto.SessionUser;
 import haeun.kim.surveyproject.domain.Participations;
-import haeun.kim.surveyproject.dto.AnswersResponseDto;
-import haeun.kim.surveyproject.dto.ParticipationsResponseDto;
-import haeun.kim.surveyproject.dto.PostsResponseDto;
-import haeun.kim.surveyproject.dto.QuestionsResponseDto;
+import haeun.kim.surveyproject.dto.*;
 import haeun.kim.surveyproject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +28,18 @@ public class IndexController {
     public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("user", user);
+            if(user.getSubject() != null) {
+                List<SurveysListResponseDto> surveyList = surveysService.findAllBySubject(user.getSubject());
+                if (!surveyList.isEmpty()) {
+                    List<PostsListResponseDto> postList = postsService.findAllBySurveyId(surveyList.get(0).getId());
+                    for (int i = 1; i < surveyList.size(); i++) {
+                        List<PostsListResponseDto> temp = postsService.findAllBySurveyId(surveyList.get(i).getId());
+                        postList.addAll(temp);
+                    }
+                    model.addAttribute("subjectPosts", postList);
+                }
+            }
         }
         return "index";
     }

@@ -44,6 +44,7 @@ public class SurveysController {
 
     @GetMapping("/surveys/result/{id}")
     public String surveysResult(@PathVariable Long id, Model model) {
+        // TODO : 예외처리
         List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(id); //해당 설문이 가진 질문 찾기
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());
@@ -64,6 +65,7 @@ public class SurveysController {
 
     @GetMapping("/excelDownXlsx/{id}")
     public void excelDownXlsx(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        // TODO : 예외처리
         List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(id); //해당 설문이 가진 질문 찾기
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());

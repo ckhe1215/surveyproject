@@ -38,6 +38,13 @@ public class SurveysService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<SurveysListResponseDto> findAllBySubject(String subject) {
+        return surveysRepository.findAllBySubject(subject).stream()
+                .map(SurveysListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     public SurveysResponseDto findTop1ByAuthorOrderByCreatedDateDesc(String email){
         Surveys entity = surveysRepository.findTop1ByAuthorOrderByCreatedDateDesc(email);
 

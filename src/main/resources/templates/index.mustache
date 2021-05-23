@@ -16,21 +16,50 @@
         <a href="/">logo</a>
     </div>
     <div class="navbar__menu">
-        {{#userName}}
+        {{#user}}
             <a href="/mypage">마이페이지</a>
             <a href="/logout">로그아웃</a>
-        {{/userName}}
-        {{^userName}}
+        {{/user}}
+        {{^user}}
             <a href="/oauth2/authorization/google">로그인</a>
-        {{/userName}}
+        {{/user}}
 
     </div>
 </nav>
 
 <article>
+    {{#user.subject}}
+        <section class="title">
+            <h1>{{user.subject}} 분야 최신글</h1>
+            <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
+        </section>
+
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th style="width:60px">번호</th>
+                <th>제목</th>
+                <th style="width:150px">작성자</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#subjectPosts}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><a href="/posts/detail/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                </tr>
+            {{/subjectPosts}}
+            </tbody>
+        </table>
+        <hr>
+    {{/user.subject}}
+
     <section class="title">
-        <h1>최신글보기</h1>
-        <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
+        <h1>전체 최신글</h1>
+        {{^user.subject}}
+            <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
+        {{/user.subject}}
     </section>
 
     <!--목록 출력 영역-->

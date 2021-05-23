@@ -12,4 +12,5 @@ public interface SurveysRepository extends JpaRepository<Surveys, Long> {
     @Query("SELECT s FROM Surveys s WHERE s.author=:email")
     List<Surveys> findByUser(@Param("email") String email);
     Surveys findTop1ByAuthorOrderByCreatedDateDesc(String email);
+    List<Surveys> findAllBySubject(String subject);
 }

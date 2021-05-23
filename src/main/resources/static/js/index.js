@@ -98,6 +98,32 @@ var main = {
         else {
             $('#add-reply').css("display", "block");
         }
+
+        $(".dropdown-menu li > a").on('click', function() {
+            var selected_text = $(this).text();
+            $("#select-subject").text(selected_text);
+        })
+
+        $('#update-subject').on('click', function() {
+            var subject = $('#select-subject').text();
+            if (subject != "선택")
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/v1/users/subject',
+                    dataType: 'text',
+                    contentType: 'application/json; charset=utf-8',
+                    data: subject
+                }).done(function() {
+                    alert("관심 주제가 변경되었습니다.");
+                    location.reload();
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+            }
+            else
+                alert("관심 주제를 선택해주세요.");
+        })
     },
     save : function () {
         var data = {
@@ -173,11 +199,23 @@ var main = {
     },
 
     createSurvey : function () {
-        var data = {
-                title: $('#survey_title').val(),
-                author: $('#user_email').val(),
-            };
+        var title_text = $('#survey_title').val();
+        var author_text = $('#user_email').val();
+        var subject_text;
+        if ($('#select-subject').text() != "선택")
+            subject_text = $('#select-subject').text();
 
+        var data = {
+            title: title_text,
+            author: author_text,
+            subject: subject_text
+        };
+
+        if (!title_text){
+            alert("제목을 입력해주세요.");
+        } else if(!subject_text) {
+            alert("주제를 선택해주세요");
+        } else {
             $.ajax({
                 type: 'POST',
                 url: '/api/v1/surveys',
@@ -189,6 +227,7 @@ var main = {
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
+        }
     },
 
      createQuestion : function () {

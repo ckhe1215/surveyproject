@@ -22,4 +22,12 @@ public class UsersService {
 		return user;
 	}
 
+	@Transactional
+	public Users updateSubject(String email, String subject) {
+		Users user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다."));
+		user.updateSubject(subject);
+		return user;
+	}
+
 }
