@@ -13,6 +13,7 @@ body {
     align-items: center;
     background: #6B3077;
     padding: 8px 120px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .navbar__logo {
@@ -21,6 +22,7 @@ body {
 
 article {
     padding : 20px 120px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .title {
