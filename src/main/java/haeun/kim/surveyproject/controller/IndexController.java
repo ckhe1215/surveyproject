@@ -3,9 +3,13 @@ package haeun.kim.surveyproject.controller;
 import haeun.kim.surveyproject.config.auth.LoginUser;
 import haeun.kim.surveyproject.config.auth.dto.SessionUser;
 import haeun.kim.surveyproject.domain.Participations;
+import haeun.kim.surveyproject.domain.Posts;
 import haeun.kim.surveyproject.dto.*;
 import haeun.kim.surveyproject.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +29,13 @@ public class IndexController {
     private final ParticipationsService participationsService;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String index(Model model, @LoginUser SessionUser user, @PageableDefault(size = 5) Pageable pageable) {
+        Page<Posts> posts = postsService.findAllDesc(pageable);
+        model.addAttribute("posts", posts);
+        model.addAttribute("isNotFirst", pageable.hasPrevious());
+        model.addAttribute("hasNext", posts.hasNext());
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
         if (user != null) {
             model.addAttribute("user", user);
             if(user.getSubject() != null) {
