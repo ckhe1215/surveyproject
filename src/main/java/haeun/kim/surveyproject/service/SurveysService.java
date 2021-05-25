@@ -6,6 +6,8 @@ import haeun.kim.surveyproject.dto.SurveysResponseDto;
 import haeun.kim.surveyproject.dto.SurveysSaveRequestDto;
 import haeun.kim.surveyproject.repository.SurveysRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +38,11 @@ public class SurveysService {
         return surveysRepository.findByUser(email).stream()
                 .map(SurveysListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Page<Surveys> findByAuthor(String email, Pageable pageable) {
+        return surveysRepository.findByAuthorOrderByCreatedDateDesc(email, pageable);
     }
 
     @Transactional

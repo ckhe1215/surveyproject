@@ -4,6 +4,7 @@ import haeun.kim.surveyproject.config.auth.LoginUser;
 import haeun.kim.surveyproject.config.auth.dto.SessionUser;
 import haeun.kim.surveyproject.domain.Participations;
 import haeun.kim.surveyproject.domain.Posts;
+import haeun.kim.surveyproject.domain.Surveys;
 import haeun.kim.surveyproject.dto.*;
 import haeun.kim.surveyproject.service.*;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,7 +31,7 @@ public class IndexController {
     private final ParticipationsService participationsService;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user, @PageableDefault(size = 5) Pageable pageable) {
+    public String index(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
         Page<Posts> posts = postsService.findAllDesc(pageable);
         model.addAttribute("posts", posts);
         model.addAttribute("isNotFirst", pageable.hasPrevious());
@@ -41,12 +43,15 @@ public class IndexController {
             if(user.getSubject() != null) {
                 List<SurveysListResponseDto> surveyList = surveysService.findAllBySubject(user.getSubject());
                 if (!surveyList.isEmpty()) {
-                    List<PostsListResponseDto> postList = postsService.findAllBySurveyId(surveyList.get(0).getId());
-                    for (int i = 1; i < surveyList.size(); i++) {
-                        List<PostsListResponseDto> temp = postsService.findAllBySurveyId(surveyList.get(i).getId());
-                        postList.addAll(temp);
-                    }
-                    model.addAttribute("subjectPosts", postList);
+					int maxSize;
+                    List<PostsListResponseDto> postList = new ArrayList<>();
+					for (SurveysListResponseDto surveysListResponseDto : surveyList)
+						postList.addAll(postsService.findAllBySurveyId(surveysListResponseDto.getId()));
+					maxSize = Math.min(postList.size(), 5);
+					List<PostsListResponseDto> newList = new ArrayList<>();
+					for(int i = 0; i < maxSize; i++)
+						newList.add(postList.get(postList.size() - i - 1));
+                    model.addAttribute("subjectPosts", newList);
                 }
             }
         }
@@ -61,12 +66,17 @@ public class IndexController {
     }
 
     @GetMapping("/posts/save")
-    public String postsSave(Model model, @LoginUser SessionUser user) {
+    public String postsSave(Model model, @LoginUser SessionUser user, @PageableDefault(size = 5) Pageable pageable) {
         if (user != null) {
+            Page<Surveys> mySurveys = surveysService.findByAuthor(user.getEmail(), pageable);
             model.addAttribute("userName", user.getName());
             model.addAttribute("userEmail", user.getEmail());
             model.addAttribute("userPoint", user.getPoint());
-            model.addAttribute("mySurveys", surveysService.findByUser(user.getEmail()));
+            model.addAttribute("mySurveys", mySurveys);
+            model.addAttribute("isNotFirst", pageable.hasPrevious());
+            model.addAttribute("hasNext", mySurveys.hasNext());
+            model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+            model.addAttribute("next", pageable.next().getPageNumber());
         }
         return "posts-save";
     }

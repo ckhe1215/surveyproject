@@ -56,7 +56,7 @@
     {{/user.subject}}
 
     <section class="title">
-        <h1>전체 최신글</h1>
+        <h1 id = "newPost">전체 최신글</h1>
         {{^user.subject}}
             <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
         {{/user.subject}}
@@ -85,14 +85,14 @@
         <ul class="pagination">
             {{#isNotFirst}}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{previous}}" aria-label="Previous">
+                    <a class="page-link" href="?page={{previous}}#newPost" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
             {{/isNotFirst}}
             {{#hasNext}}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{next}}" aria-label="Next">
+                    <a class="page-link" href="?page={{next}}#newPost" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
