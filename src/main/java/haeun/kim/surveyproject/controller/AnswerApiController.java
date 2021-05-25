@@ -18,13 +18,9 @@ import javax.servlet.http.HttpSession;
 public class AnswerApiController {
 
     private final AnswersService answersService;
-    private final UsersService usersService;
-    private final HttpSession httpSession;
 
     @PostMapping("/api/v1/answers")
-    public Long save(@RequestBody AnswersSaveRequestDto requestDto, @LoginUser SessionUser user) {
-        Users users = usersService.earnPoints(user.getEmail(), 10);
-        httpSession.setAttribute("user", new SessionUser(users));
+    public Long save(@RequestBody AnswersSaveRequestDto requestDto) {
         return answersService.save(requestDto);
     }
 }

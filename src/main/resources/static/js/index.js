@@ -11,6 +11,8 @@ for(var i = 0; i < qCnt; i++) {
     $("form-check-input, .ans8").eq(i).attr("name", "select-one-"+(i+1));
     $("form-check-input, .ans9").eq(i).attr("name", "select-one-"+(i+1));
     $("form-check-input, .ans10").eq(i).attr("name", "select-one-"+(i+1));
+    $("form-check-input, .radio-essay").eq(i).attr("name", "select-one-"+(i+1));
+    $(".input-essay").eq(i).attr("name", "select-one-"+(i+1));
 }
 
 var main = {
@@ -50,7 +52,6 @@ var main = {
         })
 
         $('#btn-answer-save').on('click', function () {
-            _this.createParticipation();
             _this.createAnswer();
         })
 
@@ -71,8 +72,10 @@ var main = {
         $('#survey-list').on('click', '.clickable-row', function(event, row) {
             if($(this).hasClass('table-active')){
                 $(this).removeClass('table-active');
+                $('.post-info').css("display", "none");
             } else {
                 $(this).addClass('table-active').siblings().removeClass('table-active');
+                $('.post-info').css("display", "block");
             }
         });
 
@@ -89,6 +92,16 @@ var main = {
             var title = td.eq(1).text();
             selected_survey_id = id;
         });
+
+        $('.radio-select').on('click', function() {
+            var now_name = $(this).attr('name');
+            $("input:text[name=" + now_name + "]").css("display", "none");
+        })
+
+        $('.radio-essay').on('click', function() {
+            var now_name = $(this).attr('name');
+            $("input:text[name=" + now_name + "]").css("display", "block");
+        })
 
         var detail_author_email = $('#detail_author_email').val();
         var detail_user_email = $('#detail_user_email').val();
@@ -133,24 +146,33 @@ var main = {
             authorEmail: $('#author_email').val(),
             surveyId: selected_survey_id,
             answerGoal: $('#answerGoal').val(),
-            expiredDate: $('#expiredDate').val(),
-            isExpired: false
+            expiredDate: $('#expiredDate').val()
         };
 
         if (parseInt($('#user-point').val()) >= 10)
         {
-            $.ajax({
-                type: 'POST',
-                url: '/api/v1/posts',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data)
-            }).done(function() {
-                alert('글이 등록되었습니다.');
-                window.location.href = '/';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
+            if(selected_survey_id == null)
+                alert('설문을 선택해주세요.');
+            else if (!$('#title').val())
+                alert('글 제목을 작성해주세요.');
+            else if (!$('#answerGoal').val())
+                alert('목표 설문수를 지정해주세요.');
+            else if (!$('#expiredDate').val())
+                alert('마감일자를 지정해주세요.');
+            else{
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/v1/posts',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).done(function() {
+                    alert('글이 등록되었습니다.');
+                    window.location.href = '/';
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+            }
         }
         else
             alert('포인트가 부족합니다.');
@@ -230,7 +252,7 @@ var main = {
         }
     },
 
-     createQuestion : function () {
+    createQuestion : function () {
         var choice1 = $('#choice1').val();
         var choice2 = $('#choice2').val();
         var choice3 = $('#choice3').val();
@@ -284,25 +306,32 @@ var main = {
             choice10 = null;
 
         var data = {
-                surveyId: $('#survey_id').val(),
-                content: $('#question-content').val(),
-                choicable: $('#choice_true').is(':checked'),
-                multiple: $('#multiple').is(':checked'),
-                etcAnswer: $('#etc_answer').is(':checked'),
-                necessaryAns: $('#necessary').is(':checked'),
-                choiceCnt: cnt,
-                choice1: choice1,
-                choice2: choice2,
-                choice3: choice3,
-                choice4: choice4,
-                choice5: choice5,
-                choice6: choice6,
-                choice7: choice7,
-                choice8: choice8,
-                choice9: choice9,
-                choice10: choice10
-            };
+            surveyId: $('#survey_id').val(),
+            content: $('#question-content').val(),
+            choicable: $('#choice_true').is(':checked'),
+            multiple: $('#multiple').is(':checked'),
+            etcAnswer: $('#etc_answer').is(':checked'),
+            necessaryAns: $('#necessary').is(':checked'),
+            choiceCnt: cnt,
+            choice1: choice1,
+            choice2: choice2,
+            choice3: choice3,
+            choice4: choice4,
+            choice5: choice5,
+            choice6: choice6,
+            choice7: choice7,
+            choice8: choice8,
+            choice9: choice9,
+            choice10: choice10
+        };
 
+        if(!$('#survey_id').val())
+            alert("잘못된 접근입니다."); //설문아이디가 없는 경우
+        else if (!$('#question-content').val())
+            alert("질문을 입력해주세요.");
+        else if ($('#choice_true').is(':checked') && !choice1)
+            alert("1번 보기를 입력해주세요.");
+        else {
             $.ajax({
                 type: 'POST',
                 url: '/api/v1/questions',
@@ -314,168 +343,184 @@ var main = {
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
+        }
     },
 
     createLastQuestion : function () {
-                var choice1 = $('#choice1').val();
-                var choice2 = $('#choice2').val();
-                var choice3 = $('#choice3').val();
-                var choice4 = $('#choice4').val();
-                var choice5 = $('#choice5').val();
-                var choice6 = $('#choice6').val();
-                var choice7 = $('#choice7').val();
-                var choice8 = $('#choice8').val();
-                var choice9 = $('#choice9').val();
-                var choice10 = $('#choice10').val();
-                var cnt = 0;
-                if (choice1)
-                    cnt++;
-                else
-                    choice1 = null;
-                if (choice2)
-                    cnt++;
-                else
-                    choice2 = null;
-                if (choice3)
-                    cnt++;
-                else
-                    choice3 = null;
-                if (choice4)
-                    cnt++;
-                else
-                    choice4 = null;
-                if (choice5)
-                    cnt++;
-                else
-                    choice5 = null;
-                if (choice6)
-                    cnt++;
-                else
-                    choice6 = null;
-                if (choice7)
-                    cnt++;
-                else
-                    choice7 = null;
-                if (choice8)
-                    cnt++;
-                else
-                    choice8 = null;
-                if (choice9)
-                    cnt++;
-                else
-                    choice9 = null;
-                if (choice10)
-                    cnt++;
-                else
-                    choice10 = null;
+        var choice1 = $('#choice1').val();
+        var choice2 = $('#choice2').val();
+        var choice3 = $('#choice3').val();
+        var choice4 = $('#choice4').val();
+        var choice5 = $('#choice5').val();
+        var choice6 = $('#choice6').val();
+        var choice7 = $('#choice7').val();
+        var choice8 = $('#choice8').val();
+        var choice9 = $('#choice9').val();
+        var choice10 = $('#choice10').val();
+        var cnt = 0;
+        if (choice1)
+            cnt++;
+        else
+            choice1 = null;
+        if (choice2)
+            cnt++;
+        else
+            choice2 = null;
+        if (choice3)
+            cnt++;
+        else
+            choice3 = null;
+        if (choice4)
+            cnt++;
+        else
+            choice4 = null;
+        if (choice5)
+            cnt++;
+        else
+            choice5 = null;
+        if (choice6)
+            cnt++;
+        else
+            choice6 = null;
+        if (choice7)
+            cnt++;
+        else
+            choice7 = null;
+        if (choice8)
+            cnt++;
+        else
+            choice8 = null;
+        if (choice9)
+            cnt++;
+        else
+            choice9 = null;
+        if (choice10)
+            cnt++;
+        else
+            choice10 = null;
 
-                var data = {
-                        surveyId: $('#survey_id').val(),
-                        content: $('#question-content').val(),
-                        choicable: $('#choice_true').is(':checked'),
-                        multiple: $('#multiple').is(':checked'),
-                        etcAnswer: $('#etc_answer').is(':checked'),
-                        necessaryAns: $('#necessary').is(':checked'),
-                        choiceCnt: cnt,
-                        choice1: choice1,
-                        choice2: choice2,
-                        choice3: choice3,
-                        choice4: choice4,
-                        choice5: choice5,
-                        choice6: choice6,
-                        choice7: choice7,
-                        choice8: choice8,
-                        choice9: choice9,
-                        choice10: choice10
-                    };
+        var data = {
+            surveyId: $('#survey_id').val(),
+            content: $('#question-content').val(),
+            choicable: $('#choice_true').is(':checked'),
+            multiple: $('#multiple').is(':checked'),
+            etcAnswer: $('#etc_answer').is(':checked'),
+            necessaryAns: $('#necessary').is(':checked'),
+            choiceCnt: cnt,
+            choice1: choice1,
+            choice2: choice2,
+            choice3: choice3,
+            choice4: choice4,
+            choice5: choice5,
+            choice6: choice6,
+            choice7: choice7,
+            choice8: choice8,
+            choice9: choice9,
+            choice10: choice10
+        };
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/v1/questions',
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data)
-                }).done(function() {
-                    window.location.href = '/posts/save';
-                }).fail(function (error) {
-                    alert(JSON.stringify(error));
-                });
-        },
+        if(!$('#survey_id').val())
+            alert("잘못된 접근입니다."); //설문아이디가 없는 경우
+        else if (!$('#question-content').val())
+            alert("질문을 입력해주세요.");
+        else if ($('#choice_true').is(':checked') && !choice1)
+            alert("1번 보기를 입력해주세요.");
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/questions',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                window.location.href = '/posts/save';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        }
+    },
 
-        createAdditionalQuestion : function () {
-            var surveyId = $('#survey_id').val();
-            var choice1 = $('#choice1').val();
-            var choice2 = $('#choice2').val();
-            var choice3 = $('#choice3').val();
-            var choice4 = $('#choice4').val();
-            var choice5 = $('#choice5').val();
-            var choice6 = $('#choice6').val();
-            var choice7 = $('#choice7').val();
-            var choice8 = $('#choice8').val();
-            var choice9 = $('#choice9').val();
-            var choice10 = $('#choice10').val();
-            var cnt = 0;
-            if (choice1)
-                cnt++;
-            else
-                choice1 = null;
-            if (choice2)
-                cnt++;
-            else
-                choice2 = null;
-            if (choice3)
-                cnt++;
-            else
-                choice3 = null;
-            if (choice4)
-                cnt++;
-            else
-                choice4 = null;
-            if (choice5)
-                cnt++;
-            else
-                choice5 = null;
-            if (choice6)
-                cnt++;
-            else
-                choice6 = null;
-            if (choice7)
-                cnt++;
-            else
-                choice7 = null;
-            if (choice8)
-                cnt++;
-            else
-                choice8 = null;
-            if (choice9)
-                cnt++;
-            else
-                choice9 = null;
-            if (choice10)
-                cnt++;
-            else
-                choice10 = null;
+    createAdditionalQuestion : function () {
+        var surveyId = $('#survey_id').val();
+        var choice1 = $('#choice1').val();
+        var choice2 = $('#choice2').val();
+        var choice3 = $('#choice3').val();
+        var choice4 = $('#choice4').val();
+        var choice5 = $('#choice5').val();
+        var choice6 = $('#choice6').val();
+        var choice7 = $('#choice7').val();
+        var choice8 = $('#choice8').val();
+        var choice9 = $('#choice9').val();
+        var choice10 = $('#choice10').val();
+        var cnt = 0;
+        if (choice1)
+            cnt++;
+        else
+            choice1 = null;
+        if (choice2)
+            cnt++;
+        else
+            choice2 = null;
+        if (choice3)
+            cnt++;
+        else
+            choice3 = null;
+        if (choice4)
+            cnt++;
+        else
+            choice4 = null;
+        if (choice5)
+            cnt++;
+        else
+            choice5 = null;
+        if (choice6)
+            cnt++;
+        else
+            choice6 = null;
+        if (choice7)
+            cnt++;
+        else
+            choice7 = null;
+        if (choice8)
+            cnt++;
+        else
+            choice8 = null;
+        if (choice9)
+            cnt++;
+        else
+            choice9 = null;
+        if (choice10)
+            cnt++;
+        else
+            choice10 = null;
 
-            var data = {
-                    surveyId: $('#survey_id').val(),
-                    content: $('#question-content').val(),
-                    choicable: $('#choice_true').is(':checked'),
-                    multiple: $('#multiple').is(':checked'),
-                    etcAnswer: $('#etc_answer').is(':checked'),
-                    necessaryAns: $('#necessary').is(':checked'),
-                    choiceCnt: cnt,
-                    choice1: choice1,
-                    choice2: choice2,
-                    choice3: choice3,
-                    choice4: choice4,
-                    choice5: choice5,
-                    choice6: choice6,
-                    choice7: choice7,
-                    choice8: choice8,
-                    choice9: choice9,
-                    choice10: choice10
-                };
+        var data = {
+            surveyId: $('#survey_id').val(),
+            content: $('#question-content').val(),
+            choicable: $('#choice_true').is(':checked'),
+            multiple: $('#multiple').is(':checked'),
+            etcAnswer: $('#etc_answer').is(':checked'),
+            necessaryAns: $('#necessary').is(':checked'),
+            choiceCnt: cnt,
+            choice1: choice1,
+            choice2: choice2,
+            choice3: choice3,
+            choice4: choice4,
+            choice5: choice5,
+            choice6: choice6,
+            choice7: choice7,
+            choice8: choice8,
+            choice9: choice9,
+            choice10: choice10
+        };
 
+        if(!$('#survey_id').val())
+            alert("잘못된 접근입니다."); //설문아이디가 없는 경우
+        else if (!$('#question-content').val())
+            alert("질문을 입력해주세요.");
+        else if ($('#choice_true').is(':checked') && !choice1)
+            alert("1번 보기를 입력해주세요.");
+        else {
             $.ajax({
                 type: 'POST',
                 url: '/api/v1/questions',
@@ -487,44 +532,54 @@ var main = {
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
-        },
+        }
+    },
 
-        createParticipation : function () {
-            var data = {
-                userEmail: $('#userEmail').val(),
-                surveyId: $('#surveyId').val()
+    createAnswer : function () {
+        var first = true;
+        var id = $('#surveyId').val();
+        var questionCnt = $('#question-size').val();
+        var sendable = true;
+        for(var i = 0; i < questionCnt; i++){
+            var essayAnswer;
+            if($('.essay-content').eq(i).css("display") === "block")
+                essayAnswer = $('.essay-content').eq(i).val();
+            else
+                essayAnswer = null;
+            if (!essayAnswer)
+                essayAnswer = null;
+            if ($('.necessaryOrNot').eq(i).val() === "true" && !essayAnswer && !$('.ans1').eq(i).is(':checked') &&
+            !$('.ans2').eq(i).is(':checked') && !$('.ans3').eq(i).is(':checked') && !$('.ans4').eq(i).is(':checked') &&
+            !$('.ans5').eq(i).is(':checked') && !$('.ans6').eq(i).is(':checked') && !$('.ans7').eq(i).is(':checked') &&
+            !$('.ans8').eq(i).is(':checked')){
+                alert("미응답 질문이 있습니다.");
+                sendable = false;
+                break;
             }
-            $.ajax({
-                type: 'POST',
-                url: '/api/v1/participations',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data)
-            });
-        },
-
-        createAnswer : function () {
-            var questionCnt = $('#question-size').val();
-            for(var i = 0; i < questionCnt; i++) {
-                $('.radio-select .ans1').attr("name", "select-one"+"-i");
-                var essayAnswer = $('.essay-content').eq(i).val();
+        }
+        for(var i = 0; i < questionCnt; i++) {
+            var essayAnswer;
+                if($('.essay-content').eq(i).css("display") === "block")
+                    essayAnswer = $('.essay-content').eq(i).val();
+                else
+                    essayAnswer = null;
                 if (!essayAnswer)
                     essayAnswer = null;
-                var data = {
-                    questionId : $('.question-id').eq(i).val(),
-                    answer1 : $('.ans1').eq(i).is(':checked'),
-                    answer2 : $('.ans2').eq(i).is(':checked'),
-                    answer3 : $('.ans3').eq(i).is(':checked'),
-                    answer4 : $('.ans4').eq(i).is(':checked'),
-                    answer5 : $('.ans5').eq(i).is(':checked'),
-                    answer6 : $('.ans6').eq(i).is(':checked'),
-                    answer7 : $('.ans7').eq(i).is(':checked'),
-                    answer8 : $('.ans8').eq(i).is(':checked'),
-                    answer9 : $('.ans9').eq(i).is(':checked'),
-                    answer10 : $('.ans10').eq(i).is(':checked'),
-                    essayAnswer : essayAnswer
-                };
-
+            var data = {
+                questionId : $('.question-id').eq(i).val(),
+                answer1 : $('.ans1').eq(i).is(':checked'),
+                answer2 : $('.ans2').eq(i).is(':checked'),
+                answer3 : $('.ans3').eq(i).is(':checked'),
+                answer4 : $('.ans4').eq(i).is(':checked'),
+                answer5 : $('.ans5').eq(i).is(':checked'),
+                answer6 : $('.ans6').eq(i).is(':checked'),
+                answer7 : $('.ans7').eq(i).is(':checked'),
+                answer8 : $('.ans8').eq(i).is(':checked'),
+                answer9 : $('.ans9').eq(i).is(':checked'),
+                answer10 : $('.ans10').eq(i).is(':checked'),
+                essayAnswer : essayAnswer
+            };
+            if (sendable){
                 $.ajax({
                     type: 'POST',
                     url: '/api/v1/answers',
@@ -532,40 +587,55 @@ var main = {
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify(data)
                 }).done(function() {
-                    window.location.href = '/';
+                    if (first){
+                        first = false
+                        var data = {
+                            userEmail: $('#userEmail').val(),
+                            surveyId: $('#surveyId').val()
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/v1/participations',
+                            dataType: 'json',
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(data)
+                        });
+                    }
+                    window.location.href = '/posts/detail/' + id;
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });
             }
-        },
-
-        deleteQuestion : function(id) {
-            $.ajax({
-                 type: 'DELETE',
-                 url: '/api/v1/questions/' + id,
-                 dataType: 'json',
-                 contentType: 'application/json; charset=utf-8',
-            }).done(function() {
-                alert('질문이 삭제되었습니다.');
-                location.reload();
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
-        },
-
-        deleteSurvey : function(id) {
-            $.ajax({
-                 type: 'DELETE',
-                 url: '/api/v1/surveys/' + id,
-                 dataType: 'json',
-                 contentType: 'application/json; charset=utf-8',
-            }).done(function() {
-                alert('설문이 삭제되었습니다.');
-                location.reload();
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
         }
+    },
+
+    deleteQuestion : function(id) {
+        $.ajax({
+             type: 'DELETE',
+             url: '/api/v1/questions/' + id,
+             dataType: 'json',
+             contentType: 'application/json; charset=utf-8',
+        }).done(function() {
+            alert('질문이 삭제되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    deleteSurvey : function(id) {
+        $.ajax({
+             type: 'DELETE',
+             url: '/api/v1/surveys/' + id,
+             dataType: 'json',
+             contentType: 'application/json; charset=utf-8',
+        }).done(function() {
+            alert('설문이 삭제되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
 };
 
 main.init();

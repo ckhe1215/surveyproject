@@ -5,24 +5,9 @@
     <br>
     <form>
         <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-        </div>
-        <br>
-
-        <div class="form-group">
-            <label for="author">작성자</label>
-            <input type="text" class="form-control" id="author" value="{{userName}}" readonly>
-        </div>
-        <br>
-
-        <input type="hidden" id="author_email" value="{{userEmail}}">
-        <input type="hidden" id="user-point" value="{{userPoint}}">
-
-        <div class="form-group">
-            <label for="surveyId">설문선택</label>
-            <br>
-            <a href="/surveys/save" role="button" class="btn btn-danger">설문 생성</a>
+            <p>게시글에 첨부될 설문을 먼저 선택해주세요!<br>
+            설문이 없을 경우 새로운 설문을 생성해주세요.<br>
+            게시글 작성시 10포인트가 사용됩니다. (현재 포인트 : {{userPoint}})</p>
             <table id = "survey-list" class="table table-hover table-horizontal table-bordered">
                 <thead class="thead-strong">
                 <tr>
@@ -57,30 +42,51 @@
                     {{/hasNext}}
                 </ul>
             </nav>
+            <a href="/surveys/save" role="button" class="btn btn-danger">새로운 설문 생성</a>
+            <br>
         </div>
-        <br>
 
-        <div class="form-group">
-            <label for="content">내용</label>
-            <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-        </div>
-        <br>
+        <div style="display:none" class="post-info">
+            <hr>
+            <div class="form-group">
+                <label for="title">게시글 제목</label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+            </div>
+            <br>
 
-        <div class="form-group">
-            <label for="answerGoal">목표 설문수</label>
-            <input type="number" class="form-control" id="answerGoal" min="1" max="5" placeholder="100 ~ 10,000">
-        </div>
-        <br>
+            <div class="form-group">
+                <label for="author">작성자</label>
+                <input type="text" class="form-control" id="author" value="{{userName}}" readonly>
+            </div>
+            <br>
 
-        <div class="form-group">
-            <label for="expiredDate">마감일자</label>
-            <input type="datetime-local" class="form-control" id="expiredDate">
+            <input type="hidden" id="author_email" value="{{userEmail}}">
+            <input type="hidden" id="user-point" value="{{userPoint}}">
+
+            <div class="form-group">
+                <label for="content">내용</label>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="answerGoal">목표 설문수</label>
+                <input type="number" class="form-control" id="answerGoal" placeholder="100 ~ 10,000">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="expiredDate">마감일자</label>
+                <input type="datetime-local" class="form-control" id="expiredDate">
+            </div>
+            <br>
+
+            <a href="/" role="button" class="btn btn-secondary">취소</a>
+            <button type="button" class="btn btn-primary" id="btn-save">등록</button>
         </div>
-        <br>
     </form>
 
-    <a href="/" role="button" class="btn btn-secondary">취소</a>
-    <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+
 </article>
 
 {{>layout/footer}}

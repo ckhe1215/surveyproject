@@ -117,6 +117,7 @@ public class IndexController {
         model.addAttribute("expired", expired);
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("userPoint", user.getPoint());
         }
         return "posts-detail";
     }

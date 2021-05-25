@@ -8,6 +8,7 @@
         <div class = "card">
             <div class="card-body">
                 <input type="hidden" class="question-id" value="{{id}}"/>
+                <input type="hidden" class="necessaryOrNot" value="{{necessaryAns}}"/>
                 <h5 class = "card-title">{{content}}</h5>
                 {{#necessaryAns}}
                     <p>*필수 응답항목입니다.</p>
@@ -51,6 +52,8 @@
                         {{^choice9}}<input class="form-check-input ans9" type="hidden"/>{{/choice9}}
                         {{#choice10}}<label><input class="form-check-input ans10" type="checkbox"/>{{choice10}}</label><br>{{/choice10}}
                         {{^choice10}}<input class="form-check-input ans10" type="hidden"/>{{/choice10}}
+                        {{#etcAnswer}}기타 <input type="text" class="form-control essay-content"/>{{/etcAnswer}}
+                        {{^etcAnswer}}<input type="hidden" class="essay-content"/>{{/etcAnswer}}
                     {{/multiple}}
 
                     {{^multiple}}
@@ -74,14 +77,10 @@
                         {{^choice9}}<input name="select-one" class="form-check-input radio-select ans9" type="hidden"/>{{/choice9}}
                         {{#choice10}}<label><input name="select-one" class="form-check-input radio-select ans10" type="radio"/>{{choice10}}</label><br>{{/choice10}}
                         {{^choice10}}<input name="select-one" class="form-check-input radio-select ans10" type="hidden"/>{{/choice10}}
+                        {{#etcAnswer}}<label><input name="select-one" class="form-check-input radio-select radio-essay" type="radio"/>기타
+                            <input style = "display:none" type="text" name="select-one" class="form-control essay-content input-essay"/></label>{{/etcAnswer}}
+                        {{^etcAnswer}}<input type="hidden" class="essay-content"/>{{/etcAnswer}}
                     {{/multiple}}
-
-                    {{#etcAnswer}}
-                        기타 <input type="text" class="form-control essay-content"/>
-                    {{/etcAnswer}}
-                    {{^etcAnswer}}
-                        <input type="hidden" class="essay-content"/>
-                    {{/etcAnswer}}
                 {{/choicable}}
             </div>
         </div>
