@@ -37,6 +37,6 @@ dependencies {
     compile('org.apache.poi:poi-ooxml:5.0.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
-//    annotationProcessor('org.projectlombok:lombok')
-//    testAnnotationProcessor('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
 }
