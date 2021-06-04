@@ -9,9 +9,11 @@
             {{^user.subject}}
                 <button class="btn btn-outline-secondary dropdown-toggle" id="select-subject" type="button" data-bs-toggle="dropdown" aria-expanded="false">선택</button>
             {{/user.subject}}
-            {{#user.subject}}
-                <button class="btn btn-outline-secondary dropdown-toggle" id="select-subject" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{user.subject}}</button>
-            {{/user.subject}}
+            {{#user}}
+                {{#subject}}
+                <button class="btn btn-outline-secondary dropdown-toggle" id="select-subject" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{subject}}</button>
+                {{/subject}}
+            {{/user}}
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item">인문학</a></li>
                 <li><a class="dropdown-item">사회과학</a></li>
