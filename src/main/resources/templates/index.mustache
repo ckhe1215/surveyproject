@@ -28,32 +28,34 @@
 </nav>
 
 <article>
-    {{#user.subject}}
-        <section class="title">
-            <h1>{{user.subject}} 분야 최신글</h1>
-            <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
-        </section>
+    {{#user}}
+        {{#subject}}
+            <section class="title">
+                <h1>{{subject}} 분야 최신글</h1>
+                <a href="/posts/save" role="button" class="btn btn-danger">글 작성</a>
+            </section>
 
-        <table class="table table-horizontal table-bordered">
-            <thead class="thead-strong">
-            <tr>
-                <th style="width:60px">번호</th>
-                <th>제목</th>
-                <th style="width:150px">작성자</th>
-            </tr>
-            </thead>
-            <tbody id="tbody">
-            {{#subjectPosts}}
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
                 <tr>
-                    <td>{{id}}</td>
-                    <td><a href="/posts/detail/{{id}}">{{title}}</a></td>
-                    <td>{{author}}</td>
+                    <th style="width:60px">번호</th>
+                    <th>제목</th>
+                    <th style="width:150px">작성자</th>
                 </tr>
-            {{/subjectPosts}}
-            </tbody>
-        </table>
-        <hr>
-    {{/user.subject}}
+                </thead>
+                <tbody id="tbody">
+                {{#subjectPosts}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td><a href="/posts/detail/{{id}}">{{title}}</a></td>
+                        <td>{{author}}</td>
+                    </tr>
+                {{/subjectPosts}}
+                </tbody>
+            </table>
+            <hr>
+        {{/subject}}
+    {{/user}}
 
     <section class="title">
         <h1 id = "newPost">전체 최신글</h1>
