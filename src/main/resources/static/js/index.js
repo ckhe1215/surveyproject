@@ -601,6 +601,7 @@ var main = {
                             data: JSON.stringify(data)
                         });
                     }
+                    alert("답변이 제출되었습니다.");
                     window.location.href = '/posts/detail/' + id;
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
