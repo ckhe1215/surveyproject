@@ -17,6 +17,7 @@ body {
 }
 
 .navbar__logo {
+    font-family: 'Lobster', cursive;
     font-size: 24px;
 }
 
