@@ -599,9 +599,10 @@ var main = {
                             dataType: 'json',
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(data)
+                        }).done(function() {
+                            alert("답변이 제출되었습니다.");
                         });
                     }
-                    alert("답변이 제출되었습니다.");
                     window.location.href = '/posts/detail/' + id;
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
