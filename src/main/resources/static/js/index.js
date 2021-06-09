@@ -603,7 +603,9 @@ var main = {
                             alert("답변이 제출되었습니다.");
                         });
                     }
-                    window.location.href = '/posts/detail/' + id;
+                    setTimeout(function() {
+                      window.location.href = '/posts/detail/' + id;
+                    }, 1000);
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });

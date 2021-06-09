@@ -81,7 +81,7 @@ public class IndexController {
         return "posts-save";
     }
 
-    @GetMapping("/posts/detail/{id}") // 이 id는 설문 아이디가 아니라 게시글 아이디임 여기 수정해야됨
+    @GetMapping("/posts/detail/{id}")
     public String postsDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         PostsResponseDto dto = postsService.findById(id);
         LocalDateTime currentDate = LocalDateTime.now();
