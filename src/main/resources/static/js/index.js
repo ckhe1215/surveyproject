@@ -604,7 +604,6 @@ var main = {
                         });
                     }
                     window.location.href = '/posts/detail/' + id;
-                    location.reload();
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });
