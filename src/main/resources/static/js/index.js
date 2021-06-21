@@ -603,9 +603,7 @@ var main = {
                             alert("답변이 제출되었습니다.");
                         });
                     }
-                    setTimeout(function() {
-                      window.location.href = '/';
-                    }, 1000);
+                    window.location.href = '/';
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });
