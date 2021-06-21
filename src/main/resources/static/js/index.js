@@ -604,7 +604,7 @@ var main = {
                         });
                     }
                     setTimeout(function() {
-                      window.location.href = '/posts/detail/' + id;
+                      window.location.href = '/';
                     }, 1000);
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
