@@ -31,8 +31,8 @@ public class  QuestionsService {
     }
 
     @Transactional
-    public List<QuestionsResponseDto> findBySurveyId(Long id){
-        return questionsRepository.findBySurveyId(id).stream()
+    public List<QuestionsResponseDto> findByPostId(Long id){
+        return questionsRepository.findByPostId(id).stream()
                 .map(QuestionsResponseDto::new)
                 .collect(Collectors.toList());
     }

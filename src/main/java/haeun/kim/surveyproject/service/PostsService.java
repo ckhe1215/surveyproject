@@ -48,11 +48,26 @@ public class PostsService {
         return postsRepository.findAllDesc(pageable);
     }
 
-    @Transactional
-    public List<PostsListResponseDto> findAllBySurveyId(Long id){
-        return postsRepository.findAllBySurveyId(id).stream()
+    public Page<Posts> findAllByAuthorEmail(String email, Pageable pageable) {
+        return postsRepository.findAllByAuthorEmail(email, pageable);
+    }
+
+    public List<PostsListResponseDto> findAllByAuthorEmail(String email){
+        return postsRepository.findAllByAuthorEmail(email).stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<PostsListResponseDto> findAllBySubject(String subject){
+        return postsRepository.findAllBySubject(subject).stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public  PostsResponseDto findTop1ByAuthorOrderByCreatedDateDesc(String email) {
+        Posts entity = postsRepository.findTop1ByAuthorOrderByCreatedDateDesc(email);
+
+        return new PostsResponseDto(entity);
     }
 
     @Transactional

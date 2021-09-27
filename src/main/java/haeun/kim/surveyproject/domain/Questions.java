@@ -15,7 +15,7 @@ public class Questions extends BaseTimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long surveyId; // 어떤 설문에 대한 질문인가?
+    private Long postId; // 어떤 설문에 대한 질문인가?
 
     private String content;
 
@@ -41,12 +41,12 @@ public class Questions extends BaseTimeEntity{
     private String choice10;
 
     @Builder
-    public Questions(Long surveyId, String content, Boolean choicable, Boolean multiple, Boolean etcAnswer,
+    public Questions(Long postId, String content, Boolean choicable, Boolean multiple, Boolean etcAnswer,
                      Boolean necessaryAns, int choiceCnt, String choice1, String choice2, String choice3,
                      String choice4, String choice5, String choice6, String choice7, String choice8,
                      String choice9, String choice10)
     {
-        this.surveyId = surveyId;
+        this.postId = postId;
         this.content = content;
         this.choicable = choicable;
         this.multiple = multiple;

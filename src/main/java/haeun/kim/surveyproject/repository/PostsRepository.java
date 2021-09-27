@@ -11,5 +11,8 @@ import java.util.List;
 public interface PostsRepository extends JpaRepository<Posts, Long> {
     @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
     Page<Posts> findAllDesc(Pageable pageable);
-    List<Posts> findAllBySurveyId(Long id);
+    Page<Posts> findAllByAuthorEmail(String email, Pageable pageable);
+    List<Posts> findAllByAuthorEmail(String email);
+    List<Posts> findAllBySubject(String subject);
+    Posts findTop1ByAuthorOrderByCreatedDateDesc(String email);
 }

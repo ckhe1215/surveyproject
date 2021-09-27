@@ -10,6 +10,7 @@ public class PostsResponseDto {
     private Long id;
     private String title;
     private String content;
+    private String subject;
     private String author;
     private String authorEmail;
     private Long surveyId;
@@ -20,6 +21,7 @@ public class PostsResponseDto {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.content = entity.getContent();
+        this.subject = entity.getSubject();
         this.author = entity.getAuthor();
         this.authorEmail = entity.getAuthorEmail();
         this.surveyId = entity.getSurveyId();

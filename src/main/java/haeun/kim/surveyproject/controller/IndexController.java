@@ -4,7 +4,6 @@ import haeun.kim.surveyproject.config.auth.LoginUser;
 import haeun.kim.surveyproject.config.auth.dto.SessionUser;
 import haeun.kim.surveyproject.domain.Participations;
 import haeun.kim.surveyproject.domain.Posts;
-import haeun.kim.surveyproject.domain.Surveys;
 import haeun.kim.surveyproject.dto.*;
 import haeun.kim.surveyproject.service.*;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,6 @@ import java.util.List;
 public class IndexController {
 
     private final PostsService postsService;
-    private final SurveysService surveysService;
     private final QuestionsService questionsService;
     private final AnswersService answersService;
     private final ParticipationsService participationsService;
@@ -40,13 +38,10 @@ public class IndexController {
         model.addAttribute("next", pageable.next().getPageNumber());
         if (user != null) {
             model.addAttribute("user", user);
-            if(user.getSubject() != null) {
-                List<SurveysListResponseDto> surveyList = surveysService.findAllBySubject(user.getSubject());
-                if (!surveyList.isEmpty()) {
+            if (user.getSubject() != null) {
+                List<PostsListResponseDto> postList = postsService.findAllBySubject(user.getSubject());
+                if (!postList.isEmpty()) {
 					int maxSize;
-                    List<PostsListResponseDto> postList = new ArrayList<>();
-					for (SurveysListResponseDto surveysListResponseDto : surveyList)
-						postList.addAll(postsService.findAllBySurveyId(surveysListResponseDto.getId()));
 					maxSize = Math.min(postList.size(), 5);
 					List<PostsListResponseDto> newList = new ArrayList<>();
 					for(int i = 0; i < maxSize; i++)
@@ -60,7 +55,7 @@ public class IndexController {
 
     @GetMapping("/mypage")
     public String mypage(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("surveys", surveysService.findByUser(user.getEmail()));
+        model.addAttribute("surveys", postsService.findAllByAuthorEmail(user.getEmail()));
         model.addAttribute("user", user);
         return "mypage";
     }
@@ -68,7 +63,7 @@ public class IndexController {
     @GetMapping("/posts/save")
     public String postsSave(Model model, @LoginUser SessionUser user, @PageableDefault(size = 5) Pageable pageable) {
         if (user != null) {
-            Page<Surveys> mySurveys = surveysService.findByAuthor(user.getEmail(), pageable);
+            Page<Posts> mySurveys = postsService.findAllByAuthorEmail(user.getEmail(), pageable);
             model.addAttribute("userName", user.getName());
             model.addAttribute("userEmail", user.getEmail());
             model.addAttribute("userPoint", user.getPoint());
@@ -100,7 +95,7 @@ public class IndexController {
         model.addAttribute("isParticipated", isParticipated);
 
         //해당 설문이 가진 질문 찾기
-        List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(survey_id);
+        List<QuestionsResponseDto> questionList = questionsService.findByPostId(survey_id);
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());
         for(int i = 1; i < questionList.size(); i++)
@@ -127,7 +122,7 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
         if (user != null) {
-            model.addAttribute("mySurveys", surveysService.findByUser(user.getEmail()));
+            model.addAttribute("mySurveys", postsService.findAllByAuthorEmail(user.getEmail()));
         }
         return "posts-update";
     }

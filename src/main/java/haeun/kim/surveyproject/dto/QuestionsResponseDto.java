@@ -1,14 +1,13 @@
 package haeun.kim.surveyproject.dto;
 
 import haeun.kim.surveyproject.domain.Questions;
-import haeun.kim.surveyproject.domain.Surveys;
 import lombok.Getter;
 
 @Getter
 public class QuestionsResponseDto {
 
     private Long id;
-    private Long surveyId; // 어떤 설문에 대한 질문인가?
+    private Long postId; // 어떤 설문에 대한 질문인가?
     private String content;
     private Boolean choicable; // true면 객관식 false면 주관식
     private Boolean multiple; // true면 중복답 허용
@@ -28,7 +27,7 @@ public class QuestionsResponseDto {
 
     public QuestionsResponseDto(Questions entity) {
         this.id = entity.getId();
-        this.surveyId = entity.getSurveyId();
+        this.postId = entity.getPostId();
         this.content = entity.getContent();
         this.choicable = entity.getChoicable();
         this.multiple = entity.getMultiple();

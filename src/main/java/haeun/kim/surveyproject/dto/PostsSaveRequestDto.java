@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class PostsSaveRequestDto {
     private String title;
     private String content;
+    private String subject;
     private String author;
     private String authorEmail;
     private Long surveyId;
@@ -19,9 +20,11 @@ public class PostsSaveRequestDto {
     private LocalDateTime expiredDate;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, String authorEmail, Long surveyId, int answerGoal, LocalDateTime expiredDate) {
+    public PostsSaveRequestDto(String title, String content, String subject, String author,
+                               String authorEmail, Long surveyId, int answerGoal, LocalDateTime expiredDate) {
         this.title = title;
         this.content = content;
+        this.subject = subject;
         this.author = author;
         this.authorEmail = authorEmail;
         this.surveyId = surveyId;

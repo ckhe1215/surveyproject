@@ -39,7 +39,7 @@ public class SurveysController {
 
     @GetMapping("/surveys/result/{id}")
     public String surveysResult(@PathVariable Long id, Model model) {
-        List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(id); //해당 설문이 가진 질문 찾기
+        List<QuestionsResponseDto> questionList = questionsService.findByPostId(id); //해당 설문이 가진 질문 찾기
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = new ArrayList<>();
         for (QuestionsResponseDto questionsResponseDto : questionList)
@@ -56,7 +56,7 @@ public class SurveysController {
 
     @GetMapping("/excelDownXlsx/{id}")
     public void excelDownXlsx(@PathVariable Long id, HttpServletResponse response) throws IOException {
-        List<QuestionsResponseDto> questionList = questionsService.findBySurveyId(id); //해당 설문이 가진 질문 찾기
+        List<QuestionsResponseDto> questionList = questionsService.findByPostId(id); //해당 설문이 가진 질문 찾기
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = new ArrayList<>();
         for (QuestionsResponseDto questionsResponseDto : questionList)
