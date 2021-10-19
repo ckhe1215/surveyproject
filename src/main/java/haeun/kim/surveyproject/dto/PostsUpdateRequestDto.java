@@ -11,15 +11,13 @@ import java.time.LocalDateTime;
 public class PostsUpdateRequestDto {
     private String title;
     private String content;
-    private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
 
     @Builder
-    public PostsUpdateRequestDto(String title, String content, Long surveyId, int answerGoal, LocalDateTime expiredDate) {
+    public PostsUpdateRequestDto(String title, String content, int answerGoal, LocalDateTime expiredDate) {
         this.title = title;
         this.content = content;
-        this.surveyId = surveyId;
         this.answerGoal = answerGoal;
         this.expiredDate = expiredDate;
     }

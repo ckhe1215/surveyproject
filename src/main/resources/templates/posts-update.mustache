@@ -4,45 +4,13 @@
     <h1>게시글 수정</h1>
     <br>
     <form>
-        <div class="form-group">
-            <label for="id">글번호</label>
-            <input type="text" class="form-control" id="id" value="{{post.id}}" readonly>
-        </div>
-        <br>
+        <input type="hidden" class="form-control" id="id" value="{{post.id}}">
+        <input type="hidden" class="form-control" id="author" value="{{post.author}}">
+        <input type="hidden" id="post-survey-id" value="{{post.id}}">
 
         <div class="form-group">
             <label for="title">제목</label>
             <input type="text" class="form-control" id="title" value="{{post.title}}">
-        </div>
-        <br>
-
-        <div class="form-group">
-            <label for="author">작성자</label>
-            <input type="text" class="form-control" id="author" value="{{post.author}}" readonly>
-        </div>
-        <br>
-
-        <input type="hidden" id="post-survey-id" value="{{post.surveyId}}">
-
-        <div class="form-group">
-            <label for="surveyId">설문선택</label>
-            <br>
-            <table id = "survey-list" class="table table-hover table-horizontal table-bordered">
-                <thead class="thead-strong">
-                <tr>
-                    <th style="width:60px">번호</th>
-                    <th>제목</th>
-                </tr>
-                </thead>
-                <tbody id="tbody">
-                {{#mySurveys}}
-                    <tr class = "clickable-row">
-                        <td id = "row_id">{{id}}</td>
-                        <td>{{title}}</td>
-                    </tr>
-                {{/mySurveys}}
-                </tbody>
-            </table>
         </div>
         <br>
 
@@ -63,11 +31,10 @@
             <input type="datetime-local" class="form-control" id="expiredDate" value="{{post.expiredDate}}">
         </div>
         <br>
-
-        <!--    isExpired(isExpired) -> false-->
     </form>
 
     <a href="/posts/detail/{{id}}" role="button" class="btn btn-secondary">취소</a>
+    <button type="button" class="btn btn-success" id="btn-question-update">질문 편집</button>
     <button type="button" class="btn btn-primary" id="btn-update">수정 완료</button>
 </article>
 

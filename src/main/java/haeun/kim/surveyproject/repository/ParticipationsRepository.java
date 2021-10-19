@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ParticipationsRepository extends JpaRepository<Participations, Long> {
-	List<Participations> findBySurveyId(Long id);
+	List<Participations> findByPostId(Long id);
 }

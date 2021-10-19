@@ -19,11 +19,11 @@ public class Participations extends BaseTimeEntity{
 	private String userEmail;
 
 	@Column(nullable = false)
-	private Long surveyId;
+	private Long postId;
 
 	@Builder
-	public Participations(String userEmail, Long surveyId){
+	public Participations(String userEmail, Long postId){
 		this.userEmail = userEmail;
-		this.surveyId = surveyId;
+		this.postId = postId;
 	}
 }

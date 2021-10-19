@@ -29,14 +29,6 @@ public class SurveysController {
     private final QuestionsService questionsService;
     private final AnswersService answersService;
 
-    @GetMapping("/surveys/save")
-    public String surveysSave(Model model, @LoginUser SessionUser user) {
-        if (user != null) {
-            model.addAttribute("userEmail", user.getEmail());
-        }
-        return "surveys-save";
-    }
-
     @GetMapping("/surveys/result/{id}")
     public String surveysResult(@PathVariable Long id, Model model) {
         List<QuestionsResponseDto> questionList = questionsService.findByPostId(id); //해당 설문이 가진 질문 찾기

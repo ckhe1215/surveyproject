@@ -22,8 +22,8 @@ public class ParticipationsService {
 	}
 
 	@Transactional
-	public List<ParticipationsResponseDto> findBySurveyId(Long id){
-		return participationsRepository.findBySurveyId(id).stream()
+	public List<ParticipationsResponseDto> findByPostId(Long id){
+		return participationsRepository.findByPostId(id).stream()
 				.map(ParticipationsResponseDto::new)
 				.collect(Collectors.toList());
 	}

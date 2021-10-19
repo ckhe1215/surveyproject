@@ -63,15 +63,9 @@ public class IndexController {
     @GetMapping("/posts/save")
     public String postsSave(Model model, @LoginUser SessionUser user, @PageableDefault(size = 5) Pageable pageable) {
         if (user != null) {
-            Page<Posts> mySurveys = postsService.findAllByAuthorEmail(user.getEmail(), pageable);
             model.addAttribute("userName", user.getName());
             model.addAttribute("userEmail", user.getEmail());
             model.addAttribute("userPoint", user.getPoint());
-            model.addAttribute("mySurveys", mySurveys);
-            model.addAttribute("isNotFirst", pageable.hasPrevious());
-            model.addAttribute("hasNext", mySurveys.hasNext());
-            model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-            model.addAttribute("next", pageable.next().getPageNumber());
         }
         return "posts-save";
     }
@@ -82,10 +76,9 @@ public class IndexController {
         LocalDateTime currentDate = LocalDateTime.now();
         boolean expired = dto.getExpiredDate().isAfter(currentDate);
         boolean isParticipated = false;
-        Long survey_id = dto.getSurveyId();
 
         // 사용자가 참여한 설문인지 확인
-        List<ParticipationsResponseDto> participationsList = participationsService.findBySurveyId(survey_id);
+        List<ParticipationsResponseDto> participationsList = participationsService.findByPostId(id);
         for (ParticipationsResponseDto participationsResponseDto : participationsList) {
             if (participationsResponseDto.getUserEmail().equals(user.getEmail())) {
                 isParticipated = true;
@@ -95,7 +88,7 @@ public class IndexController {
         model.addAttribute("isParticipated", isParticipated);
 
         //해당 설문이 가진 질문 찾기
-        List<QuestionsResponseDto> questionList = questionsService.findByPostId(survey_id);
+        List<QuestionsResponseDto> questionList = questionsService.findByPostId(id);
         // 질문들이 가진 답 찾기
         List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());
         for(int i = 1; i < questionList.size(); i++)

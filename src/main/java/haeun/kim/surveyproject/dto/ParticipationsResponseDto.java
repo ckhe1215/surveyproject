@@ -8,12 +8,12 @@ public class ParticipationsResponseDto {
 
 	private Long id;
 	private String userEmail;
-	private Long surveyId;
+	private Long postId;
 
 	public ParticipationsResponseDto(Participations entity){
 		this.id = entity.getId();
 		this.userEmail = entity.getUserEmail();
-		this.surveyId = entity.getSurveyId();
+		this.postId = entity.getPostId();
 	}
 
 }

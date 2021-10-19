@@ -4,50 +4,8 @@
     <h1>게시글 등록</h1>
     <br>
     <form>
-        <div class="form-group">
-            <p>게시글에 첨부될 설문을 먼저 선택해주세요!<br>
-            설문이 없을 경우 새로운 설문을 생성해주세요.<br>
-            게시글 작성시 10포인트가 사용됩니다. (현재 포인트 : {{userPoint}})</p>
-            <table id = "survey-list" class="table table-hover table-horizontal table-bordered">
-                <thead class="thead-strong">
-                <tr>
-                    <th style="width:60px">번호</th>
-                    <th>제목</th>
-                </tr>
-                </thead>
-                <tbody id="tbody">
-                {{#mySurveys}}
-                    <tr class = "clickable-row">
-                        <td id = "row_id">{{id}}</td>
-                        <td>{{title}}</td>
-                    </tr>
-                {{/mySurveys}}
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    {{#isNotFirst}}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{previous}}#newPost" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    {{/isNotFirst}}
-                    {{#hasNext}}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{next}}#newPost" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    {{/hasNext}}
-                </ul>
-            </nav>
-            <a href="/surveys/save" role="button" class="btn btn-danger">새로운 설문 생성</a>
-            <br>
-        </div>
-
-        <div style="display:none" class="post-info">
-            <hr>
+        <strong>게시글 작성시 10포인트가 사용됩니다. (현재 포인트 : {{userPoint}})</strong><br><br>
+        <div class="post-info">
             <div class="form-group">
                 <label for="title">게시글 제목</label>
                 <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
@@ -62,6 +20,18 @@
 
             <input type="hidden" id="author_email" value="{{userEmail}}">
             <input type="hidden" id="user-point" value="{{userPoint}}">
+
+            주제 분류<br>
+            <button class="btn btn-outline-secondary dropdown-toggle" id="select-subject" type="button" data-bs-toggle="dropdown" aria-expanded="false">선택</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">인문학</a></li>
+                <li><a class="dropdown-item">사회과학</a></li>
+                <li><a class="dropdown-item">자연과학</a></li>
+                <li><a class="dropdown-item">공학</a></li>
+                <li><a class="dropdown-item">예술</a></li>
+            </ul>
+            <br>
+            <br>
 
             <div class="form-group">
                 <label for="content">내용</label>
@@ -82,7 +52,7 @@
             <br>
 
             <a href="/" role="button" class="btn btn-secondary">취소</a>
-            <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+            <button type="button" class="btn btn-danger" id="btn-save">질문 추가</button>
         </div>
     </form>
 

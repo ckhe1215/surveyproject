@@ -13,7 +13,6 @@ public class PostsResponseDto {
     private String subject;
     private String author;
     private String authorEmail;
-    private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
 
@@ -24,7 +23,6 @@ public class PostsResponseDto {
         this.subject = entity.getSubject();
         this.author = entity.getAuthor();
         this.authorEmail = entity.getAuthorEmail();
-        this.surveyId = entity.getSurveyId();
         this.answerGoal = entity.getAnswerGoal();
         this.expiredDate = entity.getExpiredDate();
     }

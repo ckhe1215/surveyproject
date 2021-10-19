@@ -32,7 +32,7 @@ public class PostsService {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+ id));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getSurveyId(), requestDto.getAnswerGoal(), requestDto.getExpiredDate());
+        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getAnswerGoal(), requestDto.getExpiredDate());
         return id;
     }
 
@@ -48,10 +48,6 @@ public class PostsService {
         return postsRepository.findAllDesc(pageable);
     }
 
-    public Page<Posts> findAllByAuthorEmail(String email, Pageable pageable) {
-        return postsRepository.findAllByAuthorEmail(email, pageable);
-    }
-
     public List<PostsListResponseDto> findAllByAuthorEmail(String email){
         return postsRepository.findAllByAuthorEmail(email).stream()
                 .map(PostsListResponseDto::new)
@@ -62,12 +58,6 @@ public class PostsService {
         return postsRepository.findAllBySubject(subject).stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
-    }
-
-    public  PostsResponseDto findTop1ByAuthorOrderByCreatedDateDesc(String email) {
-        Posts entity = postsRepository.findTop1ByAuthorOrderByCreatedDateDesc(email);
-
-        return new PostsResponseDto(entity);
     }
 
     @Transactional

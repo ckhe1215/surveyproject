@@ -15,19 +15,17 @@ public class PostsSaveRequestDto {
     private String subject;
     private String author;
     private String authorEmail;
-    private Long surveyId;
     private int answerGoal;
     private LocalDateTime expiredDate;
 
     @Builder
     public PostsSaveRequestDto(String title, String content, String subject, String author,
-                               String authorEmail, Long surveyId, int answerGoal, LocalDateTime expiredDate) {
+                               String authorEmail, int answerGoal, LocalDateTime expiredDate) {
         this.title = title;
         this.content = content;
         this.subject = subject;
         this.author = author;
         this.authorEmail = authorEmail;
-        this.surveyId = surveyId;
         this.answerGoal = answerGoal;
         this.expiredDate = expiredDate;
     }
@@ -35,9 +33,9 @@ public class PostsSaveRequestDto {
         return Posts.builder()
                 .title(title)
                 .content(content)
+                .subject(subject)
                 .author(author)
                 .authorEmail(authorEmail)
-                .surveyId(surveyId)
                 .answerGoal(answerGoal)
                 .expiredDate(expiredDate)
                 .build();

@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParticipationsSaveRequestDto {
 	private String userEmail;
-	private Long surveyId;
+	private Long postId;
 
 	@Builder
-	public ParticipationsSaveRequestDto(String userEmail, Long surveyId){
+	public ParticipationsSaveRequestDto(String userEmail, Long postId){
 		this.userEmail = userEmail;
-		this.surveyId = surveyId;
+		this.postId = postId;
 	}
 	
 	public Participations toEntity(){
 		return Participations.builder()
 				.userEmail(userEmail)
-				.surveyId(surveyId)
+				.postId(postId)
 				.build();
 	}
 }

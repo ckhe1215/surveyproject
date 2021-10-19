@@ -1,4 +1,3 @@
-var selected_survey_id;
 var qCnt = $('#question-size').val();
 for(var i = 0; i < qCnt; i++) {
     $("form-check-input, .ans1").eq(i).attr("name", "select-one-"+(i+1));
@@ -19,7 +18,7 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
-            if (confirm("10포인트가 차감됩니다. 업로드하시겠습니까?"))
+            if (confirm("10포인트가 차감됩니다. 질문을 생성하시겠습니까?"))
                 _this.save();
         });
 
@@ -28,11 +27,13 @@ var main = {
         });
 
         $('#btn-delete').on('click', function () {
-            _this.delete();
-        })
+            if (confirm("정말 삭제 하시겠습니까?")){
+                _this.delete();
+            }
+        });
 
-        $('#btn-create-survey').on('click', function () {
-            _this.createSurvey();
+        $('#btn-question-update').on('click', function () {
+            _this.updateAndGotoQuestion();
         })
 
         $('#choice_true').on('click', function () {
@@ -57,41 +58,13 @@ var main = {
 
         $('.btn-question-delete').on('click', function () {
             var id = $(this).attr("id");
-            _this.deleteQuestion(id);
-        })
-
-        $('.btn-survey-delete').on('click', function () {
-            var id = $(this).attr("id");
-            _this.deleteSurvey(id);
+            if (confirm("정말 삭제하시겠습니까?"))
+                _this.deleteQuestion(id);
         })
 
         $('#btn-additional-question').on('click', function () {
             _this.createAdditionalQuestion();
         })
-
-        $('#survey-list').on('click', '.clickable-row', function(event, row) {
-            if($(this).hasClass('table-active')){
-                $(this).removeClass('table-active');
-                $('.post-info').css("display", "none");
-            } else {
-                $(this).addClass('table-active').siblings().removeClass('table-active');
-                $('.post-info').css("display", "block");
-            }
-        });
-
-        $('#survey-list tr').on('click', function(event, row) {
-            var tdArr = new Array();
-            var tr = $(this);
-            var td = tr.children();
-
-            td.each(function(i){
-                tdArr.push(td.eq(i).text());
-            });
-
-            var id = td.eq(0).text();
-            var title = td.eq(1).text();
-            selected_survey_id = id;
-        });
 
         $('.radio-select').on('click', function() {
             var now_name = $(this).attr('name');
@@ -139,22 +112,26 @@ var main = {
         })
     },
     save : function () {
+        var id;
+        var subject_text;
+        if ($('#select-subject').text() != "선택")
+            subject_text = $('#select-subject').text();
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
+            subject: subject_text,
             author: $('#author').val(),
             authorEmail: $('#author_email').val(),
-            surveyId: selected_survey_id,
             answerGoal: $('#answerGoal').val(),
             expiredDate: $('#expiredDate').val()
         };
 
         if (parseInt($('#user-point').val()) >= 10)
         {
-            if(selected_survey_id == null)
-                alert('설문을 선택해주세요.');
-            else if (!$('#title').val())
+            if (!$('#title').val())
                 alert('글 제목을 작성해주세요.');
+            else if(!subject_text)
+                alert('주제분류를 선택해주세요.');
             else if (!$('#answerGoal').val())
                 alert('목표 설문수를 지정해주세요.');
             else if (!$('#expiredDate').val())
@@ -165,10 +142,13 @@ var main = {
                     url: '/api/v1/posts',
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data)
+                    async: false,
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        id = data;
+                    }
                 }).done(function() {
-                    alert('글이 등록되었습니다.');
-                    window.location.href = '/';
+                    window.location.href = '/questions/save/' + id;
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });
@@ -182,7 +162,6 @@ var main = {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
-            surveyId: selected_survey_id,
             answerGoal: $('#answerGoal').val(),
             expiredDate: $('#expiredDate').val(),
             isExpired: false
@@ -204,6 +183,30 @@ var main = {
         });
     },
 
+    updateAndGotoQuestion : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val(),
+            answerGoal: $('#answerGoal').val(),
+            expiredDate: $('#expiredDate').val(),
+            isExpired: false
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/posts/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            window.location.href = '/questions/update/' + id;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
     delete : function () {
         var id = $('#id').text();
 
@@ -218,38 +221,6 @@ var main = {
          }).fail(function (error) {
              alert(JSON.stringify(error));
          });
-    },
-
-    createSurvey : function () {
-        var title_text = $('#survey_title').val();
-        var author_text = $('#user_email').val();
-        var subject_text;
-        if ($('#select-subject').text() != "선택")
-            subject_text = $('#select-subject').text();
-
-        var data = {
-            title: title_text,
-            author: author_text,
-            subject: subject_text
-        };
-
-        if (!title_text){
-            alert("제목을 입력해주세요.");
-        } else if(!subject_text) {
-            alert("주제를 선택해주세요");
-        } else {
-            $.ajax({
-                type: 'POST',
-                url: '/api/v1/surveys',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data)
-            }).done(function() {
-                window.location.href = '/questions/save';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
-        }
     },
 
     createQuestion : function () {
@@ -306,7 +277,7 @@ var main = {
             choice10 = null;
 
         var data = {
-            surveyId: $('#survey_id').val(),
+            postId: $('#post_id').val(),
             content: $('#question-content').val(),
             choicable: $('#choice_true').is(':checked'),
             multiple: $('#multiple').is(':checked'),
@@ -325,7 +296,7 @@ var main = {
             choice10: choice10
         };
 
-        if(!$('#survey_id').val())
+        if(!$('#post_id').val())
             alert("잘못된 접근입니다."); //설문아이디가 없는 경우
         else if (!$('#question-content').val())
             alert("질문을 입력해주세요.");
@@ -339,7 +310,7 @@ var main = {
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function() {
-                window.location.href = '/questions/save';
+                window.location.href = '/questions/save/' + $('#post_id').val();
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
@@ -400,7 +371,7 @@ var main = {
             choice10 = null;
 
         var data = {
-            surveyId: $('#survey_id').val(),
+            postId: $('#post_id').val(),
             content: $('#question-content').val(),
             choicable: $('#choice_true').is(':checked'),
             multiple: $('#multiple').is(':checked'),
@@ -419,7 +390,7 @@ var main = {
             choice10: choice10
         };
 
-        if(!$('#survey_id').val())
+        if(!$('#post_id').val())
             alert("잘못된 접근입니다."); //설문아이디가 없는 경우
         else if (!$('#question-content').val())
             alert("질문을 입력해주세요.");
@@ -433,7 +404,7 @@ var main = {
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function() {
-                window.location.href = '/posts/save';
+                window.location.href = '/';
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
@@ -441,7 +412,7 @@ var main = {
     },
 
     createAdditionalQuestion : function () {
-        var surveyId = $('#survey_id').val();
+        var post_id = $('#post_id').val();
         var choice1 = $('#choice1').val();
         var choice2 = $('#choice2').val();
         var choice3 = $('#choice3').val();
@@ -495,7 +466,7 @@ var main = {
             choice10 = null;
 
         var data = {
-            surveyId: $('#survey_id').val(),
+            postId: post_id,
             content: $('#question-content').val(),
             choicable: $('#choice_true').is(':checked'),
             multiple: $('#multiple').is(':checked'),
@@ -514,7 +485,7 @@ var main = {
             choice10: choice10
         };
 
-        if(!$('#survey_id').val())
+        if(!$('#post_id').val())
             alert("잘못된 접근입니다."); //설문아이디가 없는 경우
         else if (!$('#question-content').val())
             alert("질문을 입력해주세요.");
@@ -528,7 +499,7 @@ var main = {
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function() {
-                window.location.href = '/questions/update/' + surveyId;
+                window.location.href = '/questions/update/' + post_id;
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
@@ -537,7 +508,7 @@ var main = {
 
     createAnswer : function () {
         var first = true;
-        var id = $('#surveyId').val();
+        var id = $('#postId').val();
         var questionCnt = $('#question-size').val();
         var sendable = true;
         for(var i = 0; i < questionCnt; i++){
@@ -591,7 +562,7 @@ var main = {
                         first = false
                         var data = {
                             userEmail: $('#userEmail').val(),
-                            surveyId: $('#surveyId').val()
+                            postId: $('#postId').val()
                         }
                         $.ajax({
                             type: 'POST',
@@ -619,20 +590,6 @@ var main = {
              contentType: 'application/json; charset=utf-8',
         }).done(function() {
             alert('질문이 삭제되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    },
-
-    deleteSurvey : function(id) {
-        $.ajax({
-             type: 'DELETE',
-             url: '/api/v1/surveys/' + id,
-             dataType: 'json',
-             contentType: 'application/json; charset=utf-8',
-        }).done(function() {
-            alert('설문이 삭제되었습니다.');
             location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
