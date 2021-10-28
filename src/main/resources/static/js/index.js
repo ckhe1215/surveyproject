@@ -235,46 +235,16 @@ var main = {
         var choice9 = $('#choice9').val();
         var choice10 = $('#choice10').val();
         var cnt = 0;
-        if (choice1)
-            cnt++;
-        else
-            choice1 = null;
-        if (choice2)
-            cnt++;
-        else
-            choice2 = null;
-        if (choice3)
-            cnt++;
-        else
-            choice3 = null;
-        if (choice4)
-            cnt++;
-        else
-            choice4 = null;
-        if (choice5)
-            cnt++;
-        else
-            choice5 = null;
-        if (choice6)
-            cnt++;
-        else
-            choice6 = null;
-        if (choice7)
-            cnt++;
-        else
-            choice7 = null;
-        if (choice8)
-            cnt++;
-        else
-            choice8 = null;
-        if (choice9)
-            cnt++;
-        else
-            choice9 = null;
-        if (choice10)
-            cnt++;
-        else
-            choice10 = null;
+        if (choice1) cnt++; else choice1 = null;
+        if (choice2) cnt++; else choice2 = null;
+        if (choice3) cnt++; else choice3 = null;
+        if (choice4) cnt++; else choice4 = null;
+        if (choice5) cnt++; else choice5 = null;
+        if (choice6) cnt++; else choice6 = null;
+        if (choice7) cnt++; else choice7 = null;
+        if (choice8) cnt++; else choice8 = null;
+        if (choice9) cnt++; else choice9 = null;
+        if (choice10) cnt++; else choice10 = null;
 
         var data = {
             postId: $('#post_id').val(),
@@ -329,46 +299,16 @@ var main = {
         var choice9 = $('#choice9').val();
         var choice10 = $('#choice10').val();
         var cnt = 0;
-        if (choice1)
-            cnt++;
-        else
-            choice1 = null;
-        if (choice2)
-            cnt++;
-        else
-            choice2 = null;
-        if (choice3)
-            cnt++;
-        else
-            choice3 = null;
-        if (choice4)
-            cnt++;
-        else
-            choice4 = null;
-        if (choice5)
-            cnt++;
-        else
-            choice5 = null;
-        if (choice6)
-            cnt++;
-        else
-            choice6 = null;
-        if (choice7)
-            cnt++;
-        else
-            choice7 = null;
-        if (choice8)
-            cnt++;
-        else
-            choice8 = null;
-        if (choice9)
-            cnt++;
-        else
-            choice9 = null;
-        if (choice10)
-            cnt++;
-        else
-            choice10 = null;
+        if (choice1) cnt++; else choice1 = null;
+        if (choice2) cnt++; else choice2 = null;
+        if (choice3) cnt++; else choice3 = null;
+        if (choice4) cnt++; else choice4 = null;
+        if (choice5) cnt++; else choice5 = null;
+        if (choice6) cnt++; else choice6 = null;
+        if (choice7) cnt++; else choice7 = null;
+        if (choice8) cnt++; else choice8 = null;
+        if (choice9) cnt++; else choice9 = null;
+        if (choice10) cnt++; else choice10 = null;
 
         var data = {
             postId: $('#post_id').val(),
@@ -424,46 +364,16 @@ var main = {
         var choice9 = $('#choice9').val();
         var choice10 = $('#choice10').val();
         var cnt = 0;
-        if (choice1)
-            cnt++;
-        else
-            choice1 = null;
-        if (choice2)
-            cnt++;
-        else
-            choice2 = null;
-        if (choice3)
-            cnt++;
-        else
-            choice3 = null;
-        if (choice4)
-            cnt++;
-        else
-            choice4 = null;
-        if (choice5)
-            cnt++;
-        else
-            choice5 = null;
-        if (choice6)
-            cnt++;
-        else
-            choice6 = null;
-        if (choice7)
-            cnt++;
-        else
-            choice7 = null;
-        if (choice8)
-            cnt++;
-        else
-            choice8 = null;
-        if (choice9)
-            cnt++;
-        else
-            choice9 = null;
-        if (choice10)
-            cnt++;
-        else
-            choice10 = null;
+        if (choice1) cnt++; else choice1 = null;
+        if (choice2) cnt++; else choice2 = null;
+        if (choice3) cnt++; else choice3 = null;
+        if (choice4) cnt++; else choice4 = null;
+        if (choice5) cnt++; else choice5 = null;
+        if (choice6) cnt++; else choice6 = null;
+        if (choice7) cnt++; else choice7 = null;
+        if (choice8) cnt++; else choice8 = null;
+        if (choice9) cnt++; else choice9 = null;
+        if (choice10) cnt++; else choice10 = null;
 
         var data = {
             postId: post_id,
