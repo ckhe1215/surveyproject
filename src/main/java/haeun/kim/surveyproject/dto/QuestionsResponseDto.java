@@ -9,6 +9,8 @@ public class QuestionsResponseDto {
     private Long id;
     private Long postId; // 어떤 설문에 대한 질문인가?
     private String content;
+    private String originPic;
+    private String storedPic;
     private Boolean choicable; // true면 객관식 false면 주관식
     private Boolean multiple; // true면 중복답 허용
     private Boolean etcAnswer; // 객관식 마지막 보기를 기타(주관식)으로 추가
@@ -29,6 +31,8 @@ public class QuestionsResponseDto {
         this.id = entity.getId();
         this.postId = entity.getPostId();
         this.content = entity.getContent();
+        this.originPic = entity.getOriginPic();
+        this.storedPic = entity.getStoredPic();
         this.choicable = entity.getChoicable();
         this.multiple = entity.getMultiple();
         this.etcAnswer = entity.getEtcAnswer();

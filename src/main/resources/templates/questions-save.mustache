@@ -2,13 +2,19 @@
 <article>
     <h1>질문 추가</h1>
     <br>
-    <form>
+    <form enctype="multipart/form-data" id="question_form">
         <input type="hidden" id="post_id" value="{{Post.id}}">
         <input type="hidden" id="post_title" value="{{Post.title}}">
         <input type="hidden" id="post_author" value="{{Post.author}}">
         <div class="form-group">
             <label for="question-content">질문</label>
             <input type="text" class="form-control" id="question-content" placeholder="질문을 입력하세요">
+        </div>
+        <br>
+
+        <div class="form-group">
+            사진첨부<br>
+            <input type="file" name="img" id="img">
         </div>
         <br>
 

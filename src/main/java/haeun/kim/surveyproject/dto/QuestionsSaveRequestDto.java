@@ -11,6 +11,8 @@ public class QuestionsSaveRequestDto {
 
     private Long postId; // 어떤 설문에 대한 질문인가?
     private String content;
+    private String originPic;
+    private String storedPic;
     private Boolean choicable; // true면 객관식 false면 주관식
     private Boolean multiple; // true면 중복답 허용
     private Boolean etcAnswer; // 객관식 마지막 보기를 기타(주관식)으로 추가
@@ -28,13 +30,15 @@ public class QuestionsSaveRequestDto {
     private String choice10;
 
     @Builder
-    public QuestionsSaveRequestDto(Long postId, String content, Boolean choicable, Boolean multiple, Boolean etcAnswer,
-                     Boolean necessaryAns, int choiceCnt, String choice1, String choice2, String choice3,
-                     String choice4, String choice5, String choice6, String choice7, String choice8,
-                     String choice9, String choice10)
+    public QuestionsSaveRequestDto(Long postId, String content, String originPic, String storedPic,
+                                   Boolean choicable, Boolean multiple, Boolean etcAnswer, Boolean necessaryAns,
+                                   int choiceCnt, String choice1, String choice2, String choice3, String choice4,
+                                   String choice5, String choice6, String choice7, String choice8,String choice9, String choice10)
     {
         this.postId = postId;
         this.content = content;
+        this.originPic = originPic;
+        this.storedPic = storedPic;
         this.choicable = choicable;
         this.multiple = multiple;
         this.etcAnswer = etcAnswer;
@@ -55,6 +59,8 @@ public class QuestionsSaveRequestDto {
         return Questions.builder()
                 .postId(postId)
                 .content(content)
+                .originPic(originPic)
+                .storedPic(storedPic)
                 .choicable(choicable)
                 .multiple(multiple)
                 .etcAnswer(etcAnswer)

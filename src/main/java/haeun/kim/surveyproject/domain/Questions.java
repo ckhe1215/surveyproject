@@ -19,6 +19,10 @@ public class Questions extends BaseTimeEntity{
 
     private String content;
 
+    private String originPic;
+
+    private String storedPic;
+
     private Boolean choicable; // true면 객관식 false면 주관식
 
     private Boolean multiple; // true면 중복답 허용
@@ -41,13 +45,15 @@ public class Questions extends BaseTimeEntity{
     private String choice10;
 
     @Builder
-    public Questions(Long postId, String content, Boolean choicable, Boolean multiple, Boolean etcAnswer,
-                     Boolean necessaryAns, int choiceCnt, String choice1, String choice2, String choice3,
-                     String choice4, String choice5, String choice6, String choice7, String choice8,
-                     String choice9, String choice10)
+    public Questions(Long postId, String content, String originPic, String storedPic, Boolean choicable,
+                     Boolean multiple, Boolean etcAnswer, Boolean necessaryAns, int choiceCnt,
+                     String choice1, String choice2, String choice3, String choice4, String choice5,
+                     String choice6, String choice7, String choice8, String choice9, String choice10)
     {
         this.postId = postId;
         this.content = content;
+        this.originPic = originPic;
+        this.storedPic = storedPic;
         this.choicable = choicable;
         this.multiple = multiple;
         this.etcAnswer = etcAnswer;

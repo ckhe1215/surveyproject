@@ -245,26 +245,46 @@ var main = {
         if (choice8) cnt++; else choice8 = null;
         if (choice9) cnt++; else choice9 = null;
         if (choice10) cnt++; else choice10 = null;
+        let formData = new FormData($('#question_form')[0]);
+        formData.append("postId", $('#post_id').val());
+        formData.append("content", $('#question-content').val());
+        formData.append("choiceable", $('#choice_true').is(':checked'));
+        formData.append("multiple", $('#multiple').is(':checked'));
+        formData.append("etcAnswer", $('#etc_answer').is(':checked'));
+        formData.append("necessaryAns", $('#necessary').is(':checked'));
+        formData.append("choiceCnt", cnt);
+        formData.append("choice1", choice1);
+        formData.append("choice2", choice2);
+        formData.append("choice3", choice3);
+        formData.append("choice4", choice4);
+        formData.append("choice5", choice5);
+        formData.append("choice6", choice6);
+        formData.append("choice7", choice7);
+        formData.append("choice8", choice8);
+        formData.append("choice9", choice9);
+        formData.append("choice10", choice10);
 
-        var data = {
-            postId: $('#post_id').val(),
-            content: $('#question-content').val(),
-            choicable: $('#choice_true').is(':checked'),
-            multiple: $('#multiple').is(':checked'),
-            etcAnswer: $('#etc_answer').is(':checked'),
-            necessaryAns: $('#necessary').is(':checked'),
-            choiceCnt: cnt,
-            choice1: choice1,
-            choice2: choice2,
-            choice3: choice3,
-            choice4: choice4,
-            choice5: choice5,
-            choice6: choice6,
-            choice7: choice7,
-            choice8: choice8,
-            choice9: choice9,
-            choice10: choice10
-        };
+        // var data = {
+        //     postId: $('#post_id').val(),
+        //     content: $('#question-content').val(),
+        //     originPic : $('#file_upload')[0].files[0],
+        //     storedPic : $('#file_upload').val(),
+        //     choicable: $('#choice_true').is(':checked'),
+        //     multiple: $('#multiple').is(':checked'),
+        //     etcAnswer: $('#etc_answer').is(':checked'),
+        //     necessaryAns: $('#necessary').is(':checked'),
+        //     choiceCnt: cnt,
+        //     choice1: choice1,
+        //     choice2: choice2,
+        //     choice3: choice3,
+        //     choice4: choice4,
+        //     choice5: choice5,
+        //     choice6: choice6,
+        //     choice7: choice7,
+        //     choice8: choice8,
+        //     choice9: choice9,
+        //     choice10: choice10
+        // };
 
         if(!$('#post_id').val())
             alert("잘못된 접근입니다."); //설문아이디가 없는 경우
@@ -277,8 +297,9 @@ var main = {
                 type: 'POST',
                 url: '/api/v1/questions',
                 dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data)
+                contentType: false,
+                processData: false,
+                data: formData
             }).done(function() {
                 window.location.href = '/questions/save/' + $('#post_id').val();
             }).fail(function (error) {
@@ -309,26 +330,25 @@ var main = {
         if (choice8) cnt++; else choice8 = null;
         if (choice9) cnt++; else choice9 = null;
         if (choice10) cnt++; else choice10 = null;
+        let formData = new FormData($('#question_form')[0]);
+        formData.append("postId", $('#post_id').val());
+        formData.append("content", $('#question-content').val());
+        formData.append("choiceable", $('#choice_true').is(':checked'));
+        formData.append("multiple", $('#multiple').is(':checked'));
+        formData.append("etcAnswer", $('#etc_answer').is(':checked'));
+        formData.append("necessaryAns", $('#necessary').is(':checked'));
+        formData.append("choiceCnt", cnt);
+        formData.append("choice1", choice1);
+        formData.append("choice2", choice2);
+        formData.append("choice3", choice3);
+        formData.append("choice4", choice4);
+        formData.append("choice5", choice5);
+        formData.append("choice6", choice6);
+        formData.append("choice7", choice7);
+        formData.append("choice8", choice8);
+        formData.append("choice9", choice9);
+        formData.append("choice10", choice10);
 
-        var data = {
-            postId: $('#post_id').val(),
-            content: $('#question-content').val(),
-            choicable: $('#choice_true').is(':checked'),
-            multiple: $('#multiple').is(':checked'),
-            etcAnswer: $('#etc_answer').is(':checked'),
-            necessaryAns: $('#necessary').is(':checked'),
-            choiceCnt: cnt,
-            choice1: choice1,
-            choice2: choice2,
-            choice3: choice3,
-            choice4: choice4,
-            choice5: choice5,
-            choice6: choice6,
-            choice7: choice7,
-            choice8: choice8,
-            choice9: choice9,
-            choice10: choice10
-        };
 
         if(!$('#post_id').val())
             alert("잘못된 접근입니다."); //설문아이디가 없는 경우
@@ -341,8 +361,9 @@ var main = {
                 type: 'POST',
                 url: '/api/v1/questions',
                 dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data)
+                contentType: false,
+                processData: false,
+                data: formData
             }).done(function() {
                 window.location.href = '/';
             }).fail(function (error) {
