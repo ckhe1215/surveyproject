@@ -4,6 +4,7 @@ import haeun.kim.surveyproject.dto.AnswersResponseDto;
 import haeun.kim.surveyproject.dto.QuestionsSaveRequestDto;
 import haeun.kim.surveyproject.service.AnswersService;
 import haeun.kim.surveyproject.service.QuestionsService;
+import haeun.kim.surveyproject.service.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ public class QuestionsApiController {
 
     private final QuestionsService questionsService;
     private final AnswersService answersService;
+    private final S3Uploader s3Uploader;
 
     @PostMapping("/api/v1/questions")
     public Long save( @RequestParam("img") MultipartFile file,
@@ -39,7 +41,8 @@ public class QuestionsApiController {
                       @RequestParam("choice10") String choice10) {
         String filepath = null;
         try {
-            filepath = questionsService.savePic(file);
+            //            filepath = questionsService.savePic(file);
+            filepath = s3Uploader.upload(file, "images");
         } catch (IOException ignored) {
             // TODO
         }
