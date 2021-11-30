@@ -9,7 +9,10 @@
                 {{#necessaryAns}}
                     <p>*필수 응답항목입니다.</p>
                 {{/necessaryAns}}
-
+                <!--이미지-->
+                {{#storedPic}}
+                    <input type="image" src="{{storedPic}}" width="400px"/>
+                {{/storedPic}}
                 {{^choicable}}
                     <div id ="essay-answer">
                         <textarea class="form-control essay-content" placeholder="내용을 입력하세요"></textarea>
