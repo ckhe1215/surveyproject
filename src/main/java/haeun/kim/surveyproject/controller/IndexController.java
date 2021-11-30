@@ -97,15 +97,17 @@ public class IndexController {
         //해당 설문이 가진 질문 찾기
         List<QuestionsResponseDto> questionList = questionsService.findByPostId(id);
         // 질문들이 가진 답 찾기
-        List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());
-        for(int i = 1; i < questionList.size(); i++)
-        {
-            List<AnswersResponseDto> temp = answersService.findByQuestionId(questionList.get(i).getId());
-            answerList.addAll(temp);
+        int answerCnt = 0;
+        if (questionList.size() > 0) {
+            List<AnswersResponseDto> answerList = answersService.findByQuestionId(questionList.get(0).getId());
+            for(int i = 1; i < questionList.size(); i++)
+            {
+                List<AnswersResponseDto> temp = answersService.findByQuestionId(questionList.get(i).getId());
+                answerList.addAll(temp);
+            }
+            //답변 갯수 찾기
+            answerCnt =  answerList.size() / questionList.size();
         }
-        //답변 갯수 찾기
-        int answerCnt =  answerList.size() / questionList.size();
-
         if (expired && answerCnt >= dto.getAnswerGoal())
             expired = false;
         model.addAttribute("post", dto);
