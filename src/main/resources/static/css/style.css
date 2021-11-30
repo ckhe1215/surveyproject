@@ -53,3 +53,13 @@ article {
         padding : 8px 12px;
     }
 }
+
+#img-print {
+    width : 400px;
+}
+
+@media screen and (max-width: 400px) {
+    #img-print {
+        width : 100%;
+    }
+}
