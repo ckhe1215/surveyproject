@@ -1,10 +1,7 @@
 package haeun.kim.surveyproject.service;
 
 import haeun.kim.surveyproject.domain.Posts;
-import haeun.kim.surveyproject.dto.PostsListResponseDto;
-import haeun.kim.surveyproject.dto.PostsResponseDto;
-import haeun.kim.surveyproject.dto.PostsSaveRequestDto;
-import haeun.kim.surveyproject.dto.PostsUpdateRequestDto;
+import haeun.kim.surveyproject.dto.*;
 import haeun.kim.surveyproject.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,6 +18,7 @@ import java.util.stream.Collectors;
 public class PostsService {
 
     private final PostsRepository postsRepository;
+    private final QuestionsService questionsService;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
@@ -64,7 +62,10 @@ public class PostsService {
     public void delete (Long id) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-
+        List<QuestionsResponseDto> questions = questionsService.findByPostId(id);
+        for (QuestionsResponseDto question : questions) {
+            questionsService.delete(question.getId());
+        }
         postsRepository.delete(posts);
     }
 }
