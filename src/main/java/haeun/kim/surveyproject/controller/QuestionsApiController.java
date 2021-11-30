@@ -40,16 +40,20 @@ public class QuestionsApiController {
                       @RequestParam("choice9") String choice9,
                       @RequestParam("choice10") String choice10) {
         String filepath = null;
-        try {
-            //            filepath = questionsService.savePic(file);
-            filepath = s3Uploader.upload(file, "images");
-        } catch (IOException ignored) {
-            // TODO
+        String fileName = null;
+        if (!file.isEmpty()) {
+            try {
+                //            filepath = questionsService.savePic(file);
+                filepath = s3Uploader.upload(file, "images");
+                fileName = file.getOriginalFilename();
+            } catch (IOException ignored) {
+                // TODO
+            }
         }
         QuestionsSaveRequestDto requestDto = QuestionsSaveRequestDto.builder()
                                                 .postId(postId)
                                                 .content(content)
-                                                .originPic(file.getOriginalFilename())
+                                                .originPic(fileName)
                                                 .storedPic(filepath)
                                                 .choicable(choiceable)
                                                 .multiple(multiple)
